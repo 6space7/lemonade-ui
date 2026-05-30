@@ -1,5 +1,6 @@
 import {
   BadgeCheck,
+  CalendarClock,
   Eclipse,
   FolderOpen,
   Keyboard,
@@ -37,6 +38,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/book-call-button.json`,
     icon: PhoneCall,
+  },
+  {
+    name: "gradient-call-scheduler",
+    title: "Gradient Call Scheduler",
+    description:
+      "A soft duration selector paired with an animated gradient call-to-action for booking flows.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/gradient-call-scheduler.json`,
+    icon: CalendarClock,
   },
   {
     name: "loop-pad-keyboard",

@@ -62,6 +62,25 @@
       ]
     },
     {
+      "name": "gradient-call-scheduler",
+      "type": "registry:component",
+      "title": "Gradient Call Scheduler",
+      "description": "A soft duration selector paired with an animated gradient call-to-action for booking flows.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/gradient-call-scheduler.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/gradient-call-scheduler.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "loop-pad-keyboard",
       "type": "registry:component",
       "title": "Loop Pad Keyboard",

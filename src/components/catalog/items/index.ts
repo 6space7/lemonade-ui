@@ -1,5 +1,6 @@
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
+import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
 import { loopPadKeyboardCatalogItem } from "./loop-pad-keyboard"
 import { magneticButtonCatalogItem } from "./magnetic-button"
 import { promptPadCatalogItem } from "./prompt-pad"
@@ -10,6 +11,7 @@ export const catalogItems = [
   glassFolderCatalogItem,
   magneticButtonCatalogItem,
   bookCallButtonCatalogItem,
+  gradientCallSchedulerCatalogItem,
   loopPadKeyboardCatalogItem,
   promptPadCatalogItem,
 ] satisfies CatalogItem[]

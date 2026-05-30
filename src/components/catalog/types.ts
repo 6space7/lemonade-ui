@@ -1,7 +1,7 @@
 import { type LucideIcon } from "lucide-react"
 import { type ComponentType } from "react"
 
-export type FilterId = "all" | "files" | "buttons" | "keyboards" | "ai-tools"
+export type FilterId = "all" | "files" | "buttons" | "widgets" | "keyboards" | "ai-tools"
 
 export type FilterOption = {
   id: FilterId
@@ -12,6 +12,7 @@ export type ComponentKey =
   | "glass-folder"
   | "magnetic-button"
   | "book-call-button"
+  | "gradient-call-scheduler"
   | "loop-pad-keyboard"
   | "prompt-pad"
 
