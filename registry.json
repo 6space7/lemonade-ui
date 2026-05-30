@@ -1,0 +1,46 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "lemonade-ui",
+  "homepage": "http://localhost:3000",
+  "items": [
+    {
+      "name": "glass-folder",
+      "type": "registry:component",
+      "title": "Glass Folder",
+      "description": "A frosted blue folder that stays still at rest, then pops its layered papers open on hover.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/glass-folder.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/glass-folder.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:component",
+      "title": "Magnetic Button",
+      "description": "An elastic call-to-action that bends toward the cursor and snaps back with GSAP.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/lemonade/magnetic-button.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/magnetic-button.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    }
+  ]
+}
