@@ -30,88 +30,13 @@ export type PromptPadKey = {
 
 export type PromptPadProps = ComponentPropsWithoutRef<"figure"> & {
   label?: string
-  screenPrompt?: string
+  screenPrompt: string
   modeLabel?: string
   statusLabel?: string
-  keys?: PromptPadKey[]
+  keys: PromptPadKey[]
   defaultActiveKeyId?: string
   onKeyChange?: (key: PromptPadKey) => void
 }
-
-const defaultKeys: PromptPadKey[] = [
-  {
-    id: "english",
-    label: "US",
-    caption: "EN-US",
-    prompt: "Correct my English and make my language more polite",
-    icon: "us",
-    tone: "cream",
-  },
-  {
-    id: "polite",
-    label: "2",
-    prefix: "P",
-    caption: "Polite",
-    prompt: "Make this warmer, shorter, and more respectful",
-    tone: "peach",
-  },
-  {
-    id: "clear",
-    label: "3",
-    prefix: "P",
-    caption: "Clear",
-    prompt: "Rewrite this with simple clear wording",
-    tone: "lilac",
-  },
-  {
-    id: "friendly",
-    label: ":)",
-    caption: "Friendly",
-    prompt: "Make this sound friendly without being too casual",
-    icon: "smile",
-    tone: "blue",
-  },
-  {
-    id: "fix",
-    label: "Fix",
-    caption: "Grammar",
-    prompt: "Fix grammar, spelling, punctuation, and flow",
-    icon: "bug",
-    tone: "yellow",
-  },
-  {
-    id: "japanese",
-    label: "JP",
-    caption: "Nihongo",
-    prompt: "Translate this into natural Japanese",
-    icon: "jp",
-    tone: "cream",
-  },
-  {
-    id: "portuguese",
-    label: "BR",
-    caption: "PT-BR",
-    prompt: "Translate this into Brazilian Portuguese",
-    icon: "br",
-    tone: "green",
-  },
-  {
-    id: "brief",
-    label: "8",
-    prefix: "P",
-    caption: "Brief",
-    prompt: "Compress this into one crisp sentence",
-    tone: "peach",
-  },
-  {
-    id: "urgent",
-    label: "9",
-    prefix: "P",
-    caption: "Urgent",
-    prompt: "Make this direct and action-oriented",
-    tone: "coral",
-  },
-]
 
 const keyToneClassName: Record<PromptPadKeyTone, string> = {
   cream: "bg-[linear-gradient(145deg,#fffdf6,#ebe4d2)] text-[#16120c]",
@@ -125,10 +50,10 @@ const keyToneClassName: Record<PromptPadKeyTone, string> = {
 
 export function PromptPad({
   label = "AI prompt keypad with language and tone presets",
-  screenPrompt = "Correct my English and make my language more polite",
+  screenPrompt,
   modeLabel = "P2",
   statusLabel = "0",
-  keys = defaultKeys,
+  keys,
   defaultActiveKeyId,
   onKeyChange,
   className,
@@ -141,7 +66,7 @@ export function PromptPad({
   const dialRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
-  const availableKeys = keys.length > 0 ? keys : defaultKeys
+  const availableKeys = keys.slice(0, 9)
   const [activeKeyId, setActiveKeyId] = useState(defaultActiveKeyId)
   const activeKey = activeKeyId ? availableKeys.find((key) => key.id === activeKeyId) : undefined
   const screenLines = splitPrompt(activeKey?.prompt ?? screenPrompt)

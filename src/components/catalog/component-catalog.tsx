@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils"
 import { ComponentDetailsDialog } from "./component-details-dialog"
 import { ComponentPreview } from "./component-preview"
 import { ComponentTile } from "./component-tile"
-import { catalogComponents, componentDetails, filters, filterToHash, hashToFilter } from "./data"
+import { filters, filterToHash, hashToFilter } from "./data"
+import { catalogComponents, componentDetails } from "./items"
 import { type ComponentKey, type FilterId } from "./types"
 
 export function ComponentCatalog() {

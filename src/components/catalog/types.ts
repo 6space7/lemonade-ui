@@ -1,4 +1,5 @@
 import { type LucideIcon } from "lucide-react"
+import { type ComponentType } from "react"
 
 export type FilterId = "all" | "files" | "buttons" | "ai-tools"
 
@@ -35,4 +36,10 @@ export type CatalogComponent = {
   filter: FilterId
   icon: LucideIcon
   previewClassName: string
+}
+
+export type CatalogItem = {
+  metadata: CatalogComponent
+  detail: ComponentDetail
+  Preview: ComponentType
 }
