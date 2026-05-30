@@ -28,6 +28,7 @@ export const hashToFilter: Record<string, FilterId> = {
   "#avatar-orb": "widgets",
   "#cards": "cards",
   "#morning-note-card": "cards",
+  "#happy-files-card": "cards",
   "#keyboards": "keyboards",
   "#loop-pad-keyboard": "keyboards",
   "#ai-tools": "ai-tools",

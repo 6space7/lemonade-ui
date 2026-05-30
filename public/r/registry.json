@@ -119,6 +119,25 @@
       ]
     },
     {
+      "name": "happy-files-card",
+      "type": "registry:component",
+      "title": "Happy Files Card",
+      "description": "A soft folder stats card with a gradient file icon, menu affordance, and animated stat feedback.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/happy-files-card.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/happy-files-card.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "loop-pad-keyboard",
       "type": "registry:component",
       "title": "Loop Pad Keyboard",

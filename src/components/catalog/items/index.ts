@@ -2,6 +2,7 @@ import { avatarOrbCatalogItem } from "./avatar-orb"
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
+import { happyFilesCardCatalogItem } from "./happy-files-card"
 import { loopPadKeyboardCatalogItem } from "./loop-pad-keyboard"
 import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
@@ -16,6 +17,7 @@ export const catalogItems = [
   gradientCallSchedulerCatalogItem,
   avatarOrbCatalogItem,
   morningNoteCardCatalogItem,
+  happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,
   promptPadCatalogItem,
 ] satisfies CatalogItem[]

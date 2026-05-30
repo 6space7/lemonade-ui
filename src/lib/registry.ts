@@ -2,6 +2,7 @@ import {
   BadgeCheck,
   CalendarClock,
   Eclipse,
+  FolderHeart,
   FolderOpen,
   Keyboard,
   Languages,
@@ -67,6 +68,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/morning-note-card.json`,
     icon: SunMedium,
+  },
+  {
+    name: "happy-files-card",
+    title: "Happy Files Card",
+    description:
+      "A soft folder stats card with a gradient file icon, menu affordance, and animated stat feedback.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/happy-files-card.json`,
+    icon: FolderHeart,
   },
   {
     name: "loop-pad-keyboard",
