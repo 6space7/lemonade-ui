@@ -21,7 +21,6 @@ export type LoopPadKeyboardProps = Omit<ComponentPropsWithoutRef<"figure">, "onK
   label?: string
   title?: string
   topLabel?: string
-  bottomLabel?: string
   sideLabel?: string
   topKeys?: string[]
   keys?: LoopPadKey[][]
@@ -99,7 +98,6 @@ export function LoopPadKeyboard({
   label = "Loop pad mechanical keyboard",
   title = "work keeb 40% +1",
   topLabel = "loop pad",
-  bottomLabel = "Custom equipment for daily creators // Work Louder 2022",
   sideLabel = "nano pad",
   topKeys = defaultTopKeys,
   keys = defaultKeyRows,
@@ -308,9 +306,6 @@ export function LoopPadKeyboard({
               {word}
             </span>
           ))}
-        </p>
-        <p className="absolute inset-x-0 bottom-[3.4%] text-center text-[0.45rem] font-medium tracking-normal text-white/58 max-sm:hidden">
-          {bottomLabel}
         </p>
       </section>
 
