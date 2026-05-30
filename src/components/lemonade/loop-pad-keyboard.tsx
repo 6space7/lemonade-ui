@@ -21,7 +21,6 @@ export type LoopPadKeyboardProps = Omit<ComponentPropsWithoutRef<"figure">, "onK
   label?: string
   title?: string
   topLabel?: string
-  sideLabel?: string
   topKeys?: string[]
   keys?: LoopPadKey[][]
   onKeyPress?: (key: LoopPadKey) => void
@@ -98,7 +97,6 @@ export function LoopPadKeyboard({
   label = "Loop pad mechanical keyboard",
   title = "work keeb 40% +1",
   topLabel = "loop pad",
-  sideLabel = "nano pad",
   topKeys = defaultTopKeys,
   keys = defaultKeyRows,
   onKeyPress,
@@ -228,9 +226,6 @@ export function LoopPadKeyboard({
           </div>
         </div>
 
-        <p className="absolute inset-x-0 bottom-[6%] text-center text-[0.45rem] font-medium tracking-normal text-white/62 max-sm:hidden">
-          From louder minds to creative people // Work Louder 2022
-        </p>
       </section>
 
       <section className="absolute bottom-[5%] left-[2%] top-[33%] w-[12%] rounded-xl border border-white/10 bg-[#202020] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-20px_28px_rgba(0,0,0,0.34),0_14px_30px_rgba(0,0,0,0.22)]">
@@ -241,7 +236,7 @@ export function LoopPadKeyboard({
 
         <div className="absolute inset-x-[22%] top-[12%]">
           <Knob
-            ariaLabel="Turn nano pad knob"
+            ariaLabel="Turn side pad knob"
             onTurn={(element) => turnKnob("nano", element)}
           />
         </div>
@@ -257,13 +252,6 @@ export function LoopPadKeyboard({
           ))}
         </div>
 
-        <p className="absolute bottom-[9%] left-[48%] origin-left -rotate-90 whitespace-nowrap text-[0.72rem] font-black leading-[0.86] tracking-normal text-white max-sm:hidden">
-          +*<br />
-          {sideLabel}
-        </p>
-        <p className="absolute left-[9%] top-[20%] origin-left rotate-90 whitespace-nowrap text-[0.42rem] font-semibold text-white/58 max-sm:hidden">
-          Tiny module // Work louder 2022
-        </p>
       </section>
 
       <section className="absolute bottom-[5%] left-[14%] right-[1.5%] top-[33%] overflow-hidden rounded-xl border border-white/10 bg-[#202020] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-24px_36px_rgba(0,0,0,0.34),0_16px_34px_rgba(0,0,0,0.24)]">
