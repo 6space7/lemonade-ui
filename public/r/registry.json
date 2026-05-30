@@ -41,6 +41,25 @@
           "target": "hooks/use-prefers-reduced-motion.ts"
         }
       ]
+    },
+    {
+      "name": "prompt-pad",
+      "type": "registry:component",
+      "title": "Prompt Pad",
+      "description": "A retro hardware prompt keypad with a glowing LCD, language presets, tone buttons, and GSAP press feedback.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/prompt-pad.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/prompt-pad.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
     }
   ]
 }

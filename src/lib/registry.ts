@@ -2,6 +2,7 @@ import {
   BadgeCheck,
   Eclipse,
   FolderOpen,
+  Languages,
   MousePointer2,
 } from "lucide-react"
 
@@ -25,6 +26,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/magnetic-button.json`,
     icon: MousePointer2,
+  },
+  {
+    name: "prompt-pad",
+    title: "Prompt Pad",
+    description:
+      "A retro hardware prompt keypad with a glowing LCD, language presets, tone buttons, and GSAP press feedback.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/prompt-pad.json`,
+    icon: Languages,
   },
 ]
 
