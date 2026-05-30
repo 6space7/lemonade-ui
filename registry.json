@@ -81,25 +81,6 @@
       ]
     },
     {
-      "name": "avatar-orb",
-      "type": "registry:component",
-      "title": "Avatar Orb",
-      "description": "A soft profile tile with a generated avatar, tilt motion, and click-to-cycle status states.",
-      "dependencies": ["gsap", "@gsap/react"],
-      "files": [
-        {
-          "path": "src/components/lemonade/avatar-orb.tsx",
-          "type": "registry:component",
-          "target": "components/lemonade-ui/avatar-orb.tsx"
-        },
-        {
-          "path": "src/hooks/use-prefers-reduced-motion.ts",
-          "type": "registry:hook",
-          "target": "hooks/use-prefers-reduced-motion.ts"
-        }
-      ]
-    },
-    {
       "name": "morning-note-card",
       "type": "registry:component",
       "title": "Morning Note Card",

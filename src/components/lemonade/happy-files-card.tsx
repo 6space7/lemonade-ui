@@ -1,7 +1,7 @@
 "use client"
 
-import { type ComponentPropsWithoutRef, type LucideIcon, useRef } from "react"
-import { Camera, File, Image, MoreVertical, Video } from "lucide-react"
+import { type ComponentPropsWithoutRef, useRef } from "react"
+import { Camera, File, Image, type LucideIcon, MoreVertical, Video } from "lucide-react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 

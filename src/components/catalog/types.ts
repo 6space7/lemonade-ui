@@ -13,7 +13,6 @@ export type ComponentKey =
   | "magnetic-button"
   | "book-call-button"
   | "gradient-call-scheduler"
-  | "avatar-orb"
   | "morning-note-card"
   | "happy-files-card"
   | "loop-pad-keyboard"

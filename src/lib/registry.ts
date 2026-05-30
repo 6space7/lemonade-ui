@@ -9,7 +9,6 @@ import {
   MousePointer2,
   PhoneCall,
   SunMedium,
-  UserRound,
 } from "lucide-react"
 
 export const installBaseUrl = "http://localhost:3000/r"
@@ -50,15 +49,6 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/gradient-call-scheduler.json`,
     icon: CalendarClock,
-  },
-  {
-    name: "avatar-orb",
-    title: "Avatar Orb",
-    description:
-      "A soft profile tile with a generated avatar, tilt motion, and click-to-cycle status states.",
-    status: "registry:component",
-    command: `npx shadcn@latest add ${installBaseUrl}/avatar-orb.json`,
-    icon: UserRound,
   },
   {
     name: "morning-note-card",
