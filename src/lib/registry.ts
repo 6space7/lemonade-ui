@@ -7,6 +7,7 @@ import {
   Languages,
   MousePointer2,
   PhoneCall,
+  SunMedium,
   UserRound,
 } from "lucide-react"
 
@@ -57,6 +58,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/avatar-orb.json`,
     icon: UserRound,
+  },
+  {
+    name: "morning-note-card",
+    title: "Morning Note Card",
+    description:
+      "A colorful morning card with a time header and a floating note that cycles through messages on click.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/morning-note-card.json`,
+    icon: SunMedium,
   },
   {
     name: "loop-pad-keyboard",

@@ -1,7 +1,7 @@
 import { type LucideIcon } from "lucide-react"
 import { type ComponentType } from "react"
 
-export type FilterId = "all" | "files" | "buttons" | "widgets" | "keyboards" | "ai-tools"
+export type FilterId = "all" | "files" | "buttons" | "widgets" | "cards" | "keyboards" | "ai-tools"
 
 export type FilterOption = {
   id: FilterId
@@ -14,6 +14,7 @@ export type ComponentKey =
   | "book-call-button"
   | "gradient-call-scheduler"
   | "avatar-orb"
+  | "morning-note-card"
   | "loop-pad-keyboard"
   | "prompt-pad"
 

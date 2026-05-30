@@ -100,6 +100,25 @@
       ]
     },
     {
+      "name": "morning-note-card",
+      "type": "registry:component",
+      "title": "Morning Note Card",
+      "description": "A colorful morning card with a time header and a floating note that cycles through messages on click.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/morning-note-card.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/morning-note-card.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "loop-pad-keyboard",
       "type": "registry:component",
       "title": "Loop Pad Keyboard",
