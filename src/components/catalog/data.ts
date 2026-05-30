@@ -24,6 +24,7 @@ export const hashToFilter: Record<string, FilterId> = {
   "#book-call-button": "buttons",
   "#widgets": "widgets",
   "#gradient-call-scheduler": "widgets",
+  "#avatar-orb": "widgets",
   "#keyboards": "keyboards",
   "#loop-pad-keyboard": "keyboards",
   "#ai-tools": "ai-tools",

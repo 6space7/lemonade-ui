@@ -1,3 +1,4 @@
+import { avatarOrbCatalogItem } from "./avatar-orb"
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
@@ -12,6 +13,7 @@ export const catalogItems = [
   magneticButtonCatalogItem,
   bookCallButtonCatalogItem,
   gradientCallSchedulerCatalogItem,
+  avatarOrbCatalogItem,
   loopPadKeyboardCatalogItem,
   promptPadCatalogItem,
 ] satisfies CatalogItem[]
