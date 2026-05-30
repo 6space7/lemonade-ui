@@ -2,6 +2,7 @@ import {
   BadgeCheck,
   Eclipse,
   FolderOpen,
+  Keyboard,
   Languages,
   MousePointer2,
   PhoneCall,
@@ -36,6 +37,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/book-call-button.json`,
     icon: PhoneCall,
+  },
+  {
+    name: "loop-pad-keyboard",
+    title: "Loop Pad Keyboard",
+    description:
+      "A configurable 40% creator keyboard with clickable keycaps, macro pads, rotating knobs, and GSAP press feedback.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/loop-pad-keyboard.json`,
+    icon: Keyboard,
   },
   {
     name: "prompt-pad",

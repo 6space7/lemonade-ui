@@ -8,6 +8,7 @@ export const filters: FilterOption[] = [
   { id: "all", label: "All" },
   { id: "files", label: "Files" },
   { id: "buttons", label: "Buttons" },
+  { id: "keyboards", label: "Keyboards" },
   { id: "ai-tools", label: "AI Tools" },
 ]
 
@@ -20,6 +21,8 @@ export const hashToFilter: Record<string, FilterId> = {
   "#buttons": "buttons",
   "#magnetic-button": "buttons",
   "#book-call-button": "buttons",
+  "#keyboards": "keyboards",
+  "#loop-pad-keyboard": "keyboards",
   "#ai-tools": "ai-tools",
   "#prompt-pad": "ai-tools",
   "#registry": "all",
@@ -30,6 +33,7 @@ export const filterToHash: Record<FilterId, string> = {
   all: "#all",
   files: "#files",
   buttons: "#buttons",
+  keyboards: "#keyboards",
   "ai-tools": "#ai-tools",
 }
 

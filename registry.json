@@ -62,6 +62,25 @@
       ]
     },
     {
+      "name": "loop-pad-keyboard",
+      "type": "registry:component",
+      "title": "Loop Pad Keyboard",
+      "description": "A configurable 40% creator keyboard with clickable keycaps, macro pads, rotating knobs, and GSAP press feedback.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/loop-pad-keyboard.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/loop-pad-keyboard.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "prompt-pad",
       "type": "registry:component",
       "title": "Prompt Pad",
