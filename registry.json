@@ -43,6 +43,25 @@
       ]
     },
     {
+      "name": "book-call-button",
+      "type": "registry:component",
+      "title": "Book Call Button",
+      "description": "A booking CTA that expands its neon action segment into a full call state on hover or focus.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/book-call-button.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/book-call-button.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "prompt-pad",
       "type": "registry:component",
       "title": "Prompt Pad",

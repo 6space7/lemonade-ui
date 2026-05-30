@@ -1,3 +1,4 @@
+import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { magneticButtonCatalogItem } from "./magnetic-button"
 import { promptPadCatalogItem } from "./prompt-pad"
@@ -7,6 +8,7 @@ import { type CatalogItem, type ComponentDetail, type ComponentKey } from "../ty
 export const catalogItems = [
   glassFolderCatalogItem,
   magneticButtonCatalogItem,
+  bookCallButtonCatalogItem,
   promptPadCatalogItem,
 ] satisfies CatalogItem[]
 

@@ -19,6 +19,7 @@ export const hashToFilter: Record<string, FilterId> = {
   "#glass-folder": "files",
   "#buttons": "buttons",
   "#magnetic-button": "buttons",
+  "#book-call-button": "buttons",
   "#ai-tools": "ai-tools",
   "#prompt-pad": "ai-tools",
   "#registry": "all",

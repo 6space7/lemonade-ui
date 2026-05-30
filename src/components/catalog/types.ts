@@ -8,7 +8,7 @@ export type FilterOption = {
   label: string
 }
 
-export type ComponentKey = "glass-folder" | "magnetic-button" | "prompt-pad"
+export type ComponentKey = "glass-folder" | "magnetic-button" | "book-call-button" | "prompt-pad"
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
 

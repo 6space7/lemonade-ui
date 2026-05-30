@@ -4,6 +4,7 @@ import {
   FolderOpen,
   Languages,
   MousePointer2,
+  PhoneCall,
 } from "lucide-react"
 
 export const installBaseUrl = "http://localhost:3000/r"
@@ -26,6 +27,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/magnetic-button.json`,
     icon: MousePointer2,
+  },
+  {
+    name: "book-call-button",
+    title: "Book Call Button",
+    description:
+      "A booking CTA that expands its neon action segment into a full call state on hover or focus.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/book-call-button.json`,
+    icon: PhoneCall,
   },
   {
     name: "prompt-pad",
