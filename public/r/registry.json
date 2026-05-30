@@ -7,7 +7,7 @@
       "name": "glass-folder",
       "type": "registry:component",
       "title": "Glass Folder",
-      "description": "A frosted blue folder that stays still at rest, then pops its layered papers open on hover.",
+      "description": "A frosted resource folder that opens on hover to reveal configurable link or note cards.",
       "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {

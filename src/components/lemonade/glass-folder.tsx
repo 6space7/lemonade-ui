@@ -9,16 +9,62 @@ import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion"
 
 type GlassFolderProps = ComponentPropsWithoutRef<"figure"> & {
   label?: string
+  folderLabel?: string
+  ctaLabel?: string
+  noteLabel?: string
+  items?: GlassFolderItem[]
+}
+
+export type GlassFolderItem = {
+  title: string
+  description?: string
+  href?: string
+  badge?: string
+  actionLabel?: string
 }
 
 const paperLines = [
-  ["w-28", "w-20", "w-24", "w-16"],
-  ["w-24", "w-28", "w-20", "w-24"],
-  ["w-20", "w-24", "w-28", "w-16"],
+  ["w-[78%]", "w-[62%]"],
+  ["w-[66%]", "w-[80%]"],
+  ["w-[58%]", "w-[74%]"],
+]
+
+const defaultItems: GlassFolderItem[] = [
+  {
+    title: "Brief",
+    description: "Goals, owner, kickoff links.",
+    href: "#",
+    badge: "Info",
+    actionLabel: "Open",
+  },
+  {
+    title: "Assets",
+    description: "Screens, specs, tokens.",
+    href: "#",
+    badge: "Kit",
+    actionLabel: "Open",
+  },
+  {
+    title: "Roadmap",
+    description: "Milestones and notes.",
+    href: "#",
+    badge: "Plan",
+    actionLabel: "Open",
+  },
+]
+
+const paperPlacements = [
+  "left-[30%]",
+  "left-1/2 z-10",
+  "left-[70%]",
 ]
 
 export function GlassFolder({
   label = "Frosted folder with layered documents",
+  folderLabel = "Workspace",
+  ctaLabel = "Open",
+  noteLabel = "Note",
+  items = defaultItems,
   className,
   onPointerEnter,
   onPointerLeave,
@@ -29,6 +75,7 @@ export function GlassFolder({
   const folderFrontRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
+  const folderItems = items.length > 0 ? items : defaultItems
 
   useGSAP(
     () => {
@@ -92,18 +139,20 @@ export function GlassFolder({
 
         gsap.killTweensOf(animatedTargets)
 
+        const fanOffset = rootRef.current.getBoundingClientRect().width * 0.13
+
         gsap.to(papers, {
-          y: (index) => [-42, -56, -42][index] ?? -42,
-          x: (index) => [-8, 0, 8][index] ?? 0,
-          rotate: (index) => [-10, 0, 10][index] ?? 0,
+          y: (index) => [-54, -70, -54][index] ?? -54,
+          x: (index) => [-fanOffset, 0, fanOffset][index] ?? 0,
+          rotate: (index) => [-9, 0, 9][index] ?? 0,
           duration: 0.58,
           ease: "elastic.out(1, 0.62)",
           stagger: 0.035,
         })
 
         gsap.to(folderFrontRef.current, {
-          y: 14,
-          scaleY: 0.94,
+          y: 18,
+          scaleY: 0.92,
           duration: 0.42,
           ease: "power3.out",
         })
@@ -187,37 +236,70 @@ export function GlassFolder({
         />
         <div className="absolute left-[5%] top-[6%] h-[22%] w-[44%] rounded-t-[1.35rem] bg-[linear-gradient(180deg,rgba(135,214,251,0.94),rgba(85,183,232,0.88))]" />
 
-        {paperLines.map((lines, paperIndex) => (
-          <div
-            key={paperIndex}
-            data-folder-paper
-            className={cn(
-              "absolute bottom-[31%] h-[58%] w-[39%] -translate-x-1/2 rounded-xl border border-[#d9f3ff] bg-[#f7fbfc] shadow-[0_14px_28px_rgba(30,91,132,0.12)]",
-              paperIndex === 0 && "left-[34%]",
-              paperIndex === 1 && "left-1/2 z-10",
-              paperIndex === 2 && "left-[66%]"
-            )}
-          >
-            <div className="mx-auto mt-6 h-2 w-[70%] rounded-full bg-[#61b9e9]" />
-            <div className="mt-6 space-y-3 px-8">
-              {lines.map((width, lineIndex) => (
-                <div key={lineIndex} className="grid grid-cols-[1fr_0.7fr] gap-3">
-                  <span
-                    data-folder-line
-                    className={cn(
-                      "h-1.5 origin-left rounded-full bg-[#8ed2f3]/75",
-                      width
-                    )}
-                  />
-                  <span
-                    data-folder-line
-                    className="h-1.5 origin-left rounded-full bg-[#8ed2f3]/55"
-                  />
-                </div>
-              ))}
+        {paperLines.map((lines, paperIndex) => {
+          const item = folderItems[paperIndex % folderItems.length] ?? defaultItems[paperIndex]
+          const actionLabel = item.actionLabel ?? (item.href ? ctaLabel : noteLabel)
+          const content = (
+            <>
+              <div className="flex min-w-0 items-center justify-between gap-1.5">
+                <span className="min-w-0 truncate rounded-full bg-[#e5f6ff] px-1.5 py-0.5 text-[0.48rem] font-bold uppercase tracking-wide text-[#2d86b7]">
+                  {item.badge ?? `Item ${paperIndex + 1}`}
+                </span>
+                <span className="max-w-[3.4rem] shrink-0 truncate rounded-full bg-[#61b9e9]/16 px-1.5 py-0.5 text-[0.5rem] font-bold text-[#227aaa]">
+                  {actionLabel}
+                </span>
+              </div>
+              <div className="mt-3 min-w-0 text-left">
+                <p className="truncate text-[0.72rem] font-bold leading-tight text-[#164f74]">
+                  {item.title}
+                </p>
+                <p className="mt-1 overflow-hidden text-[0.54rem] font-semibold leading-snug text-[#4f91b5] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                  {item.description ?? "Add a link, note, or resource."}
+                </p>
+              </div>
+              <div className="mt-auto space-y-1.5 pt-2">
+                {lines.slice(0, 2).map((width, lineIndex) => (
+                  <div key={lineIndex} className="grid grid-cols-[1fr_0.55fr] gap-2">
+                    <span
+                      data-folder-line
+                      className={cn(
+                        "h-1 max-w-full origin-left rounded-full bg-[#8ed2f3]/70",
+                        width
+                      )}
+                    />
+                    <span
+                      data-folder-line
+                      className="h-1 origin-left rounded-full bg-[#8ed2f3]/45"
+                    />
+                  </div>
+                ))}
+              </div>
+            </>
+          )
+          const paperClassName = cn(
+            "absolute bottom-[30%] flex h-[57%] w-[34%] -translate-x-1/2 flex-col overflow-hidden rounded-[1rem] border border-[#d9f3ff] bg-[#f8fcfe] p-2.5 text-left no-underline shadow-[0_14px_30px_rgba(30,91,132,0.13)] outline-none transition-[border-color,box-shadow] hover:border-[#b7e8ff] hover:shadow-[0_18px_34px_rgba(30,91,132,0.22)] focus-visible:border-[#50b7e9] focus-visible:shadow-[0_0_0_3px_rgba(80,183,233,0.24),0_18px_34px_rgba(30,91,132,0.2)]",
+            paperPlacements[paperIndex]
+          )
+
+          return item.href ? (
+            <a
+              key={paperIndex}
+              data-folder-paper
+              href={item.href}
+              className={paperClassName}
+            >
+              {content}
+            </a>
+          ) : (
+            <div
+              key={paperIndex}
+              data-folder-paper
+              className={paperClassName}
+            >
+              {content}
             </div>
-          </div>
-        ))}
+          )
+        })}
 
         <div
           ref={folderFrontRef}
@@ -231,6 +313,9 @@ export function GlassFolder({
                 <span className="h-2 rounded-full bg-[#2f9ed7]/36" />
               </div>
             ))}
+          </div>
+          <div className="absolute bottom-4 left-5 rounded-full border border-white/35 bg-white/28 px-3 py-1 text-[0.68rem] font-bold text-[#176f9e] shadow-[0_8px_22px_rgba(52,143,197,0.16)] backdrop-blur-md">
+            {folderLabel}
           </div>
         </div>
       </div>

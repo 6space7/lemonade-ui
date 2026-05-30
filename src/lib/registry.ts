@@ -12,7 +12,7 @@ export const components = [
     name: "glass-folder",
     title: "Glass Folder",
     description:
-      "A frosted blue folder that stays still at rest, then pops its layered papers open on hover.",
+      "A frosted resource folder that opens on hover to reveal configurable link or note cards.",
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/glass-folder.json`,
     icon: FolderOpen,
