@@ -32,7 +32,7 @@ export const components = [
     name: "book-call-button",
     title: "Book Call Button",
     description:
-      "A booking CTA that expands its neon action segment into a full call state on hover or focus.",
+      "A slide-to-book CTA with a draggable neon handle that completes into a full call state.",
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/book-call-button.json`,
     icon: PhoneCall,

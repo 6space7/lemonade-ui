@@ -46,7 +46,7 @@
       "name": "book-call-button",
       "type": "registry:component",
       "title": "Book Call Button",
-      "description": "A booking CTA that expands its neon action segment into a full call state on hover or focus.",
+      "description": "A slide-to-book CTA with a draggable neon handle that completes into a full call state.",
       "dependencies": ["gsap", "@gsap/react", "lucide-react"],
       "files": [
         {

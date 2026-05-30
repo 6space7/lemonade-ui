@@ -9,9 +9,9 @@ function BookCallButtonDemo() {
   return (
     <div className="grid min-h-[28rem] place-items-center p-8">
       <BookCallButton
-        href="#book-a-call"
         label="Book a call"
-        onClick={(event) => event.preventDefault()}
+        resetOnComplete
+        onComplete={() => console.log("Book call confirmed")}
       />
     </div>
   )
@@ -22,8 +22,10 @@ const usageCode = `import { BookCallButton } from "@/components/lemonade-ui/book
 export default function Demo() {
   return (
     <BookCallButton
-      href="/book"
       label="Book a call"
+      onComplete={() => {
+        console.log("Open your calendar booking flow")
+      }}
     />
   )
 }`
@@ -43,7 +45,7 @@ export const bookCallButtonCatalogItem: CatalogItem = {
     title: "Book Call Button",
     category: "Buttons",
     description:
-      "A booking CTA that expands its neon action segment into a full call state on hover or focus.",
+      "A slide-to-book CTA with a draggable neon handle that completes into a full call state.",
     registryUrl: `${installBaseUrl}/book-call-button.json`,
     dependencies: ["gsap", "@gsap/react", "lucide-react"],
     importName: "BookCallButton",

@@ -1,6 +1,13 @@
 "use client"
 
-import { type ComponentPropsWithoutRef, type ReactNode, useRef } from "react"
+import {
+  type ComponentPropsWithoutRef,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { PhoneCall } from "lucide-react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
@@ -8,9 +15,14 @@ import { useGSAP } from "@gsap/react"
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
 
-export type BookCallButtonProps = Omit<ComponentPropsWithoutRef<"a">, "children"> & {
+export type BookCallButtonProps = Omit<ComponentPropsWithoutRef<"button">, "children"> & {
   label?: string
-  icon?: ReactNode
+  completeIcon?: ReactNode
+  completeLabel?: string
+  threshold?: number
+  resetOnComplete?: boolean
+  resetDelay?: number
+  onComplete?: () => void
 }
 
 const arrowDots = [
@@ -29,23 +41,37 @@ const arrowDots = [
 
 export function BookCallButton({
   label = "Book a call",
-  icon,
-  href = "#",
+  completeIcon,
+  completeLabel = "Call booked",
+  threshold = 0.82,
+  resetOnComplete = false,
+  resetDelay = 1400,
+  onComplete,
+  type = "button",
+  disabled,
   className,
-  onPointerEnter,
-  onPointerLeave,
-  onPointerDown,
-  onPointerUp,
-  onFocus,
-  onBlur,
+  onClick,
+  onKeyDown,
   "aria-label": ariaLabel,
   ...props
 }: BookCallButtonProps) {
-  const rootRef = useRef<HTMLAnchorElement>(null)
+  const rootRef = useRef<HTMLButtonElement>(null)
+  const trackRef = useRef<HTMLSpanElement>(null)
+  const handleRef = useRef<HTMLSpanElement>(null)
   const fillRef = useRef<HTMLSpanElement>(null)
   const arrowRef = useRef<HTMLSpanElement>(null)
   const labelRef = useRef<HTMLSpanElement>(null)
   const iconRef = useRef<HTMLSpanElement>(null)
+  const positionRef = useRef({ x: 0 })
+  const activePointerIdRef = useRef<number | null>(null)
+  const dragStartClientXRef = useRef(0)
+  const dragStartXRef = useRef(0)
+  const maxXRef = useRef(0)
+  const handleWidthRef = useRef(0)
+  const completedRef = useRef(false)
+  const draggedRef = useRef(false)
+  const resetTimeoutRef = useRef<number | null>(null)
+  const [isComplete, setIsComplete] = useState(false)
   const reducedMotion = usePrefersReducedMotion()
 
   useGSAP(
@@ -54,155 +80,251 @@ export function BookCallButton({
         return
       }
 
-      gsap.set(fillRef.current, { width: "34%" })
-      gsap.set(arrowRef.current, { x: 0, opacity: 1, scale: 1 })
-      gsap.set(labelRef.current, { x: 0, opacity: 1 })
-      gsap.set(iconRef.current, { scale: 0.7, opacity: 0, rotate: -12 })
-      gsap.set(rootRef.current, { scale: 1 })
+      measure()
+      updatePosition(completedRef.current ? maxXRef.current : 0)
+
+      const handleResize = () => {
+        measure()
+        updatePosition(completedRef.current ? maxXRef.current : positionRef.current.x)
+      }
+
+      window.addEventListener("resize", handleResize)
+
+      return () => {
+        window.removeEventListener("resize", handleResize)
+      }
     },
     { dependencies: [reducedMotion], scope: rootRef }
   )
 
-  const open = () => {
-    if (reducedMotion) {
+  useEffect(() => {
+    return () => {
+      if (resetTimeoutRef.current) {
+        window.clearTimeout(resetTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  function measure() {
+    if (!trackRef.current || !handleRef.current) {
       return
     }
 
-    gsap.killTweensOf([
-      rootRef.current,
-      fillRef.current,
-      arrowRef.current,
-      labelRef.current,
-      iconRef.current,
-    ])
+    const handleWidth = handleRef.current.offsetWidth
+    handleWidthRef.current = handleWidth
+    maxXRef.current = Math.max(0, trackRef.current.clientWidth - handleWidth)
+  }
 
-    const timeline = gsap.timeline({
-      defaults: {
-        ease: "power3.out",
+  function updatePosition(nextX: number) {
+    const maxX = maxXRef.current
+    const handleWidth = handleWidthRef.current
+    const x = clamp(nextX, 0, maxX)
+    const progress = maxX > 0 ? x / maxX : 0
+
+    positionRef.current.x = x
+
+    gsap.set(handleRef.current, { x })
+    gsap.set(handleRef.current, {
+      opacity: clamp(1 - (progress - 0.9) / 0.1, 0, 1),
+    })
+    gsap.set(fillRef.current, { width: handleWidth + x })
+    gsap.set(labelRef.current, {
+      x: progress * 18,
+      opacity: clamp(1 - progress * 1.8, 0, 1),
+    })
+    gsap.set(arrowRef.current, {
+      x: progress * 12,
+      opacity: clamp(1 - progress * 2.4, 0, 1),
+      scale: 1 - progress * 0.1,
+    })
+    gsap.set(iconRef.current, {
+      opacity: clamp((progress - 0.58) / 0.42, 0, 1),
+      rotate: -14 + progress * 14,
+      scale: 0.72 + progress * 0.28,
+    })
+  }
+
+  const animateTo = (targetX: number, onDone?: () => void) => {
+    gsap.killTweensOf(positionRef.current)
+
+    if (reducedMotion) {
+      updatePosition(targetX)
+      onDone?.()
+      return
+    }
+
+    gsap.to(positionRef.current, {
+      x: targetX,
+      duration: targetX > positionRef.current.x ? 0.42 : 0.5,
+      ease: targetX > positionRef.current.x ? "power3.out" : "elastic.out(1, 0.62)",
+      onUpdate: () => updatePosition(positionRef.current.x),
+      onComplete: () => {
+        updatePosition(targetX)
+        onDone?.()
       },
     })
-
-    timeline
-      .to(rootRef.current, { scale: 1.015, duration: 0.32 }, 0)
-      .to(fillRef.current, { width: "100%", duration: 0.5 }, 0)
-      .to(labelRef.current, { x: 18, opacity: 0, duration: 0.2, ease: "power2.out" }, 0)
-      .to(arrowRef.current, { x: 24, opacity: 0, scale: 0.82, duration: 0.2 }, 0)
-      .to(
-        iconRef.current,
-        { scale: 1, opacity: 1, rotate: 0, duration: 0.38, ease: "back.out(1.7)" },
-        0.16
-      )
   }
 
-  const close = () => {
-    if (reducedMotion) {
+  const reset = () => {
+    completedRef.current = false
+    setIsComplete(false)
+    animateTo(0)
+  }
+
+  const complete = () => {
+    if (completedRef.current) {
+      animateTo(maxXRef.current)
       return
     }
 
-    gsap.killTweensOf([
-      rootRef.current,
-      fillRef.current,
-      arrowRef.current,
-      labelRef.current,
-      iconRef.current,
-    ])
+    completedRef.current = true
+    setIsComplete(true)
+    animateTo(maxXRef.current, () => {
+      onComplete?.()
 
-    const timeline = gsap.timeline({
-      defaults: {
+      if (resetOnComplete) {
+        resetTimeoutRef.current = window.setTimeout(reset, resetDelay)
+      }
+    })
+  }
+
+  const startDrag = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    if (disabled || completedRef.current) {
+      return
+    }
+
+    event.preventDefault()
+    measure()
+    activePointerIdRef.current = event.pointerId
+    dragStartClientXRef.current = event.clientX
+    dragStartXRef.current = positionRef.current.x
+    draggedRef.current = false
+    event.currentTarget.setPointerCapture(event.pointerId)
+    gsap.killTweensOf(positionRef.current)
+
+    if (!reducedMotion) {
+      gsap.to(rootRef.current, {
+        scale: 0.992,
+        duration: 0.18,
+        ease: "power2.out",
+      })
+    }
+  }
+
+  const drag = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    if (activePointerIdRef.current !== event.pointerId || completedRef.current) {
+      return
+    }
+
+    const delta = event.clientX - dragStartClientXRef.current
+
+    if (Math.abs(delta) > 3) {
+      draggedRef.current = true
+    }
+
+    updatePosition(dragStartXRef.current + delta)
+  }
+
+  const endDrag = (event: ReactPointerEvent<HTMLSpanElement>) => {
+    if (activePointerIdRef.current !== event.pointerId) {
+      return
+    }
+
+    activePointerIdRef.current = null
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+
+    if (!reducedMotion) {
+      gsap.to(rootRef.current, {
+        scale: 1,
+        duration: 0.24,
         ease: "power3.out",
-      },
-    })
-
-    timeline
-      .to(rootRef.current, { scale: 1, duration: 0.32 }, 0)
-      .to(fillRef.current, { width: "34%", duration: 0.44 }, 0)
-      .to(iconRef.current, { scale: 0.7, opacity: 0, rotate: 12, duration: 0.18 }, 0)
-      .to(labelRef.current, { x: 0, opacity: 1, duration: 0.24 }, 0.1)
-      .to(arrowRef.current, { x: 0, opacity: 1, scale: 1, duration: 0.24 }, 0.1)
-  }
-
-  const press = () => {
-    if (reducedMotion) {
-      return
+      })
     }
 
-    gsap.to(rootRef.current, {
-      scale: 0.985,
-      duration: 0.16,
-      ease: "power2.out",
-    })
-  }
-
-  const release = () => {
-    if (reducedMotion) {
-      return
+    if (maxXRef.current > 0 && positionRef.current.x / maxXRef.current >= threshold) {
+      complete()
+    } else {
+      animateTo(0)
     }
-
-    gsap.to(rootRef.current, {
-      scale: 1.015,
-      duration: 0.28,
-      ease: "back.out(1.7)",
-    })
   }
 
   return (
-    <a
+    <button
       ref={rootRef}
-      href={href}
-      aria-label={ariaLabel ?? label}
+      type={type}
+      disabled={disabled}
+      aria-label={ariaLabel ?? (isComplete ? completeLabel : `${label}. Drag right to activate.`)}
+      aria-pressed={isComplete}
       className={cn(
-        "group/book-call relative isolate inline-flex h-20 w-[min(31rem,calc(100vw-3rem))] items-center overflow-hidden rounded-full border-[7px] border-[#111111] bg-[#080808] px-2 text-white shadow-[0_20px_45px_rgba(0,0,0,0.22)] outline-none transition-shadow duration-300 focus-visible:shadow-[0_0_0_4px_rgba(119,255,31,0.3),0_22px_50px_rgba(0,0,0,0.28)] sm:h-24",
+        "relative isolate inline-flex h-20 w-[min(31rem,calc(100vw-3rem))] items-center overflow-hidden rounded-full border-[7px] border-[#111111] bg-[#080808] text-white shadow-[0_20px_45px_rgba(0,0,0,0.22)] outline-none transition-[box-shadow,opacity] duration-300 focus-visible:shadow-[0_0_0_4px_rgba(119,255,31,0.3),0_22px_50px_rgba(0,0,0,0.28)] disabled:cursor-not-allowed disabled:opacity-55 sm:h-24",
         className
       )}
-      onPointerEnter={(event) => {
-        onPointerEnter?.(event)
-        open()
+      onClick={(event) => {
+        if (draggedRef.current) {
+          event.preventDefault()
+          draggedRef.current = false
+          return
+        }
+
+        onClick?.(event)
       }}
-      onPointerLeave={(event) => {
-        onPointerLeave?.(event)
-        close()
-      }}
-      onPointerDown={(event) => {
-        onPointerDown?.(event)
-        press()
-      }}
-      onPointerUp={(event) => {
-        onPointerUp?.(event)
-        release()
-      }}
-      onFocus={(event) => {
-        onFocus?.(event)
-        open()
-      }}
-      onBlur={(event) => {
-        onBlur?.(event)
-        close()
+      onKeyDown={(event) => {
+        onKeyDown?.(event)
+
+        if (event.defaultPrevented || disabled) {
+          return
+        }
+
+        if ((event.key === "Enter" || event.key === " ") && !completedRef.current) {
+          event.preventDefault()
+          measure()
+          complete()
+        }
+
+        if (event.key === "Escape" && !completedRef.current) {
+          animateTo(0)
+        }
       }}
       {...props}
     >
       <span
-        ref={fillRef}
+        ref={trackRef}
         aria-hidden="true"
-        className="absolute bottom-2 left-2 top-2 z-0 rounded-full bg-[linear-gradient(135deg,#62ff3d,#b6ff14)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-14px_24px_rgba(0,0,0,0.08)]"
-      />
-
-      <span
-        ref={arrowRef}
-        aria-hidden="true"
-        className="absolute left-[12%] top-1/2 z-10 h-8 w-10 -translate-y-1/2"
+        className="absolute inset-2 overflow-hidden rounded-full"
       >
-        {arrowDots.map((dot) => (
+        <span
+          ref={fillRef}
+          className="absolute inset-y-0 left-0 rounded-full bg-[linear-gradient(135deg,#62ff3d,#b6ff14)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-14px_24px_rgba(0,0,0,0.08)]"
+        />
+        <span
+          ref={handleRef}
+          className="absolute inset-y-0 left-0 z-10 grid w-[34%] touch-none cursor-grab place-items-center rounded-full bg-[linear-gradient(135deg,#62ff3d,#b6ff14)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-14px_24px_rgba(0,0,0,0.08)] active:cursor-grabbing"
+          onPointerDown={startDrag}
+          onPointerMove={drag}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+        >
           <span
-            key={`${dot.x}-${dot.y}`}
-            className="absolute size-[4px] rounded-full bg-[#111111]"
-            style={{ left: dot.x, top: dot.y }}
-          />
-        ))}
+            ref={arrowRef}
+            className="relative h-8 w-10"
+          >
+            {arrowDots.map((dot) => (
+              <span
+                key={`${dot.x}-${dot.y}`}
+                className="absolute size-[4px] rounded-full bg-[#111111]"
+                style={{ left: dot.x, top: dot.y }}
+              />
+            ))}
+          </span>
+        </span>
       </span>
 
       <span
         ref={labelRef}
-        className="relative z-10 ml-[37%] block min-w-0 flex-1 whitespace-nowrap text-center text-2xl font-medium leading-none tracking-normal text-white sm:text-[2.4rem]"
+        className="pointer-events-none absolute inset-y-0 left-[37%] right-8 z-10 grid place-items-center whitespace-nowrap text-2xl font-medium leading-none tracking-normal text-white sm:text-[2.4rem]"
       >
         {label}
       </span>
@@ -210,10 +332,14 @@ export function BookCallButton({
       <span
         ref={iconRef}
         aria-hidden="true"
-        className="absolute inset-0 z-10 grid place-items-center text-[#111111]"
+        className="pointer-events-none absolute inset-0 z-20 grid place-items-center text-[#111111]"
       >
-        {icon ?? <PhoneCall className="size-7 sm:size-9" strokeWidth={2.3} />}
+        {completeIcon ?? <PhoneCall className="size-7 sm:size-9" strokeWidth={2.3} />}
       </span>
-    </a>
+    </button>
   )
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max)
 }
