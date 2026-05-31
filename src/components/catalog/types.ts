@@ -12,6 +12,7 @@ export type ComponentKey =
   | "glass-folder"
   | "magnetic-button"
   | "book-call-button"
+  | "three-d-button"
   | "gradient-call-scheduler"
   | "pixel-status-stack"
   | "animated-dock"

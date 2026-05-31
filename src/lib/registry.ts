@@ -2,6 +2,7 @@ import {
   Activity,
   BadgeCheck,
   CalendarClock,
+  CircleDotDashed,
   Eclipse,
   FolderHeart,
   FolderOpen,
@@ -42,6 +43,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/book-call-button.json`,
     icon: PhoneCall,
+  },
+  {
+    name: "three-d-button",
+    title: "3D Button",
+    description:
+      "A glossy 3D slide button with a draggable raised cap and configurable completion messages.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/three-d-button.json`,
+    icon: CircleDotDashed,
   },
   {
     name: "gradient-call-scheduler",

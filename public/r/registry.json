@@ -62,6 +62,25 @@
       ]
     },
     {
+      "name": "three-d-button",
+      "type": "registry:component",
+      "title": "3D Button",
+      "description": "A glossy 3D slide button with a draggable raised cap and configurable completion messages.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/three-d-button.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/three-d-button.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "gradient-call-scheduler",
       "type": "registry:component",
       "title": "Gradient Call Scheduler",

@@ -8,6 +8,7 @@ import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
 import { pixelStatusStackCatalogItem } from "./pixel-status-stack"
 import { promptPadCatalogItem } from "./prompt-pad"
+import { threeDButtonCatalogItem } from "./three-d-button"
 
 import { type CatalogItem, type ComponentDetail, type ComponentKey } from "../types"
 
@@ -15,6 +16,7 @@ export const catalogItems = [
   glassFolderCatalogItem,
   magneticButtonCatalogItem,
   bookCallButtonCatalogItem,
+  threeDButtonCatalogItem,
   gradientCallSchedulerCatalogItem,
   pixelStatusStackCatalogItem,
   animatedDockCatalogItem,
