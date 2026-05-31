@@ -1,3 +1,4 @@
+import { animatedDockCatalogItem } from "./animated-dock"
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
@@ -7,6 +8,7 @@ import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
 import { pixelStatusStackCatalogItem } from "./pixel-status-stack"
 import { promptPadCatalogItem } from "./prompt-pad"
+import { threeDButtonCatalogItem } from "./three-d-button"
 
 import { type CatalogItem, type ComponentDetail, type ComponentKey } from "../types"
 
@@ -14,8 +16,10 @@ export const catalogItems = [
   glassFolderCatalogItem,
   magneticButtonCatalogItem,
   bookCallButtonCatalogItem,
+  threeDButtonCatalogItem,
   gradientCallSchedulerCatalogItem,
   pixelStatusStackCatalogItem,
+  animatedDockCatalogItem,
   morningNoteCardCatalogItem,
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,

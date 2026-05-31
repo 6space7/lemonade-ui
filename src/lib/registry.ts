@@ -2,12 +2,14 @@ import {
   Activity,
   BadgeCheck,
   CalendarClock,
+  CircleDotDashed,
   Eclipse,
   FolderHeart,
   FolderOpen,
   Keyboard,
   Languages,
   MousePointer2,
+  PanelBottom,
   PhoneCall,
   SunMedium,
 } from "lucide-react"
@@ -44,6 +46,15 @@ export const components = [
     icon: PhoneCall,
   },
   {
+    name: "three-d-button",
+    title: "3D Button",
+    description:
+      "A glossy 3D slide button with a draggable raised cap and configurable completion messages.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/three-d-button.json`,
+    icon: CircleDotDashed,
+  },
+  {
     name: "gradient-call-scheduler",
     title: "Gradient Call Scheduler",
     description:
@@ -60,6 +71,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/pixel-status-stack.json`,
     icon: Activity,
+  },
+  {
+    name: "animated-dock",
+    title: "Animated Dock",
+    description:
+      "A macOS-style app dock with pointer magnification, hover labels, active selection, and GSAP bounce feedback.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/animated-dock.json`,
+    icon: PanelBottom,
   },
   {
     name: "morning-note-card",
