@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="./public/lemonade-readme-banner.svg" alt="Lemonade UI animated beta lab banner" width="100%" />
+</p>
 
-## Getting Started
+# Lemonade UI
 
-First, run the development server:
+Lemonade UI is a playful beta lab for animated, interactive interface components.
+
+It is early, a little experimental, and intentionally alive. The goal is to build components that feel useful in real products, not just pretty in a screenshot.
+
+## Beta Note
+
+This library is still in beta. Component APIs, file names, and examples may change while the collection is being shaped.
+
+Design credit is coming next. Each component page will include proper credit for the visual reference or inspiration behind that component.
+
+## What Is Inside
+
+- Animated components built for real interaction.
+- Copyable usage examples for each component.
+- Multiple install command styles where useful.
+- Component detail pages with preview, code, dependencies, and AI prompt helpers.
+- Motion handled with GSAP where it gives the component a better feel.
+
+## Local Setup
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) and start playing with the lab.
+
+## Useful Commands
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Shape
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```txt
+src/components/lemonade/        component source
+src/components/catalog/items/   component page entries
+src/components/catalog/         catalog UI and install helpers
+public/r/                       generated install payloads
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Built With
 
-## Learn More
+- Next.js
+- React
+- Tailwind CSS
+- GSAP
+- lucide-react
+- Codex, as the build partner
 
-To learn more about Next.js, take a look at the following resources:
+## Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The lab is open, but the paint is still wet. Expect fast changes, better examples, and more component credits as the library grows.

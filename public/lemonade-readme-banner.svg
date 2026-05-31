@@ -1,0 +1,162 @@
+<svg width="1280" height="420" viewBox="0 0 1280 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Lemonade UI beta lab banner</title>
+  <desc id="desc">Animated banner for a playful component lab built with Codex.</desc>
+  <style>
+    .bg-shift {
+      animation: bgShift 9s ease-in-out infinite alternate;
+    }
+
+    .float-a {
+      animation: floatA 5.6s ease-in-out infinite;
+    }
+
+    .float-b {
+      animation: floatB 6.4s ease-in-out infinite;
+    }
+
+    .float-c {
+      animation: floatC 7.2s ease-in-out infinite;
+    }
+
+    .pulse {
+      animation: pulse 2.6s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .spark {
+      animation: spark 1.9s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .scan {
+      animation: scan 4.8s ease-in-out infinite;
+    }
+
+    .dash {
+      stroke-dasharray: 10 16;
+      animation: dash 16s linear infinite;
+    }
+
+    @keyframes bgShift {
+      0% { transform: translateX(-22px) translateY(-8px) scale(1.02); opacity: 0.82; }
+      100% { transform: translateX(18px) translateY(10px) scale(1.06); opacity: 1; }
+    }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-16px) rotate(2deg); }
+    }
+
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0) rotate(4deg); }
+      50% { transform: translateY(14px) rotate(-2deg); }
+    }
+
+    @keyframes floatC {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-12px) translateX(8px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.72; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+
+    @keyframes spark {
+      0%, 100% { transform: scale(0.74) rotate(0deg); opacity: 0.35; }
+      45% { transform: scale(1.12) rotate(18deg); opacity: 1; }
+    }
+
+    @keyframes scan {
+      0%, 100% { transform: translateX(-120px); opacity: 0; }
+      18%, 74% { opacity: 0.52; }
+      50% { transform: translateX(560px); opacity: 0.8; }
+    }
+
+    @keyframes dash {
+      to { stroke-dashoffset: -520; }
+    }
+  </style>
+
+  <defs>
+    <linearGradient id="paint" x1="102" y1="64" x2="1169" y2="396" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f7f34a"/>
+      <stop offset="0.32" stop-color="#6efcff"/>
+      <stop offset="0.64" stop-color="#ff7ab8"/>
+      <stop offset="1" stop-color="#8b6dff"/>
+    </linearGradient>
+    <linearGradient id="cardPaint" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e9ecff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(606 218) rotate(90) scale(244 554)">
+      <stop stop-color="#f7f34a" stop-opacity="0.52"/>
+      <stop offset="0.42" stop-color="#57f4ff" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#111111" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.92 0 1 0 0 0.94 0 0 1 0 0.22 0 0 0 0.82 0"/>
+      <feBlend in2="SourceGraphic" mode="screen"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="420" rx="38" fill="#0d0f0e"/>
+  <g class="bg-shift" opacity="0.9">
+    <ellipse cx="330" cy="96" rx="260" ry="128" fill="#f7f34a" opacity="0.18"/>
+    <ellipse cx="884" cy="126" rx="316" ry="136" fill="#57f4ff" opacity="0.16"/>
+    <ellipse cx="760" cy="352" rx="360" ry="128" fill="#ff7ab8" opacity="0.14"/>
+  </g>
+  <rect x="18" y="18" width="1244" height="384" rx="28" stroke="url(#paint)" stroke-opacity="0.72" stroke-width="2"/>
+  <path class="dash" d="M84 338C184 278 262 362 354 302C448 240 536 344 634 286C728 231 802 300 910 246C1018 192 1092 247 1194 188" stroke="#f7f34a" stroke-width="2" stroke-linecap="round" opacity="0.42"/>
+  <rect class="scan" x="146" y="66" width="96" height="286" rx="48" fill="#ffffff" opacity="0.18"/>
+  <circle cx="606" cy="218" r="238" fill="url(#glow)"/>
+
+  <g filter="url(#softShadow)">
+    <g class="float-a">
+      <rect x="732" y="98" width="228" height="142" rx="28" fill="url(#cardPaint)" opacity="0.96"/>
+      <rect x="758" y="126" width="92" height="14" rx="7" fill="#111111" opacity="0.9"/>
+      <rect x="758" y="160" width="154" height="12" rx="6" fill="#111111" opacity="0.2"/>
+      <rect x="758" y="188" width="124" height="12" rx="6" fill="#111111" opacity="0.18"/>
+      <circle class="pulse" cx="914" cy="194" r="16" fill="#f7f34a"/>
+    </g>
+
+    <g class="float-b">
+      <rect x="938" y="198" width="214" height="120" rx="60" fill="#f7f34a"/>
+      <rect x="960" y="220" width="76" height="76" rx="38" fill="#111111"/>
+      <path d="M993 244L1017 258L993 272" stroke="#f7f34a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="1054" y="272" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="800">ship</text>
+    </g>
+
+    <g class="float-c">
+      <rect x="828" y="258" width="174" height="86" rx="30" fill="#151716" stroke="#ffffff" stroke-opacity="0.12"/>
+      <rect x="850" y="280" width="44" height="44" rx="14" fill="#8b6dff"/>
+      <rect x="908" y="286" width="68" height="10" rx="5" fill="#ffffff" opacity="0.74"/>
+      <rect x="908" y="306" width="44" height="10" rx="5" fill="#ffffff" opacity="0.28"/>
+    </g>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <circle class="spark" cx="114" cy="104" r="8" fill="#f7f34a"/>
+    <circle class="spark" cx="646" cy="86" r="6" fill="#57f4ff"/>
+    <circle class="spark" cx="1162" cy="110" r="7" fill="#ff7ab8"/>
+    <circle class="spark" cx="1102" cy="342" r="5" fill="#f7f34a"/>
+  </g>
+
+  <g>
+    <rect x="86" y="96" width="128" height="128" rx="34" fill="#f7f34a"/>
+    <path d="M150 128V192M118 160H182" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="190" cy="118" r="10" fill="#111111"/>
+  </g>
+
+  <text x="86" y="286" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="900" letter-spacing="0">Lemonade UI</text>
+  <text x="90" y="326" fill="#ffffff" opacity="0.72" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">playful beta lab for animated components</text>
+  <g>
+    <rect x="88" y="346" width="184" height="34" rx="17" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.14"/>
+    <circle class="pulse" cx="112" cy="363" r="6" fill="#f7f34a"/>
+    <text x="130" y="371" fill="#ffffff" opacity="0.82" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">built with Codex</text>
+  </g>
+</svg>
