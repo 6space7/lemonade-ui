@@ -39,6 +39,7 @@ export type AuraHeroGalleryItem = {
   label: string
   src?: string
   alt?: string
+  objectPosition?: string
   scene?: "party" | "wheel" | "toast" | "festival" | "fashion" | "motion"
   gradient?: string
 }
@@ -121,6 +122,8 @@ export function AuraEventsHero({
 }: AuraEventsHeroProps) {
   const rootRef = useRef<HTMLElement>(null)
   const logoTrackRef = useRef<HTMLDivElement>(null)
+  const galleryTrackRef = useRef<HTMLDivElement>(null)
+  const galleryLoopRef = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
   const marqueeLogos = useMemo(() => [...logos, ...logos], [logos])
 
@@ -150,11 +153,23 @@ export function AuraEventsHero({
             ease: "none",
           })
         }
+
+        if (galleryTrackRef.current && galleryLoopRef.current) {
+          const travelDistance = galleryLoopRef.current.offsetWidth
+
+          gsap.set(galleryTrackRef.current, { x: 0 })
+          gsap.to(galleryTrackRef.current, {
+            x: -travelDistance,
+            duration: Math.max(28, travelDistance / 58),
+            repeat: -1,
+            ease: "none",
+          })
+        }
       }, rootRef)
 
       return () => context.revert()
     },
-    { dependencies: [reducedMotion, logos.length], scope: rootRef }
+    { dependencies: [reducedMotion, logos.length, gallery.length], scope: rootRef }
   )
 
   const liftGalleryCard = (card: HTMLElement) => {
@@ -323,16 +338,27 @@ export function AuraEventsHero({
           </div>
         </div>
 
-        <div className="relative mt-24 h-[17rem] w-full overflow-visible">
-          <div className="absolute left-1/2 top-0 flex w-max -translate-x-[calc(50%+2.5rem)] justify-start gap-4 px-4 @5xl/aura:-translate-x-[calc(50%+9rem)]">
-            {gallery.map((item, index) => (
-              <EventGalleryCard
-                key={`${item.label}-${index}`}
-                item={item}
-                onPointerEnter={liftGalleryCard}
-                onPointerLeave={settleGalleryCard}
-              />
-            ))}
+        <div className="relative mt-24 h-[20rem] w-full overflow-visible">
+          <div className="absolute left-1/2 top-0 w-[calc(100%+4rem)] -translate-x-1/2 overflow-visible sm:w-[calc(100%+8rem)] @5xl/aura:w-[calc(100%+12rem)]">
+            <div ref={galleryTrackRef} className="flex w-max will-change-transform">
+              {[0, 1, 2].map((groupIndex) => (
+                <div
+                  key={groupIndex}
+                  ref={groupIndex === 0 ? galleryLoopRef : undefined}
+                  className="flex w-max justify-start gap-4 pr-4"
+                  aria-hidden={groupIndex > 0}
+                >
+                  {gallery.map((item, index) => (
+                    <EventGalleryCard
+                      key={`${item.label}-${groupIndex}-${index}`}
+                      item={item}
+                      onPointerEnter={liftGalleryCard}
+                      onPointerLeave={settleGalleryCard}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -436,13 +462,19 @@ function EventGalleryCard({
     <article
       data-aura-gallery
       aria-label={item.alt ?? item.label}
-      className="relative h-[17rem] w-[18rem] shrink-0 overflow-hidden rounded-t-[3rem] bg-black shadow-[0_28px_60px_rgba(0,0,0,0.14)]"
+      className="group relative h-[20rem] w-[18rem] shrink-0 overflow-hidden rounded-[3rem] bg-black shadow-[0_28px_60px_rgba(0,0,0,0.14)] will-change-transform"
       onPointerEnter={(event) => onPointerEnter(event.currentTarget)}
       onPointerLeave={(event) => onPointerLeave(event.currentTarget)}
     >
       {item.src ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={item.src} alt={item.alt ?? item.label} className="size-full object-cover" />
+        <img
+          src={item.src}
+          alt={item.alt ?? item.label}
+          loading="lazy"
+          className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          style={{ objectPosition: item.objectPosition }}
+        />
       ) : (
         <GeneratedEventScene item={item} />
       )}

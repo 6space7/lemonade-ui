@@ -34,12 +34,12 @@ const logos: AuraHeroLogo[] = [
 ]
 
 const gallery: AuraHeroGalleryItem[] = [
-  { label: "Night party", scene: "party", gradient: "linear-gradient(135deg,#19191d,#8c6d51 46%,#f7ece3)" },
-  { label: "Fairground", scene: "wheel", gradient: "linear-gradient(135deg,#bfe7f6,#f5f9fb)" },
-  { label: "Celebration toast", scene: "toast", gradient: "linear-gradient(135deg,#f597c4,#ffcc75 52%,#7a43ff)" },
-  { label: "Costume moment", scene: "festival", gradient: "linear-gradient(135deg,#8bf2e9,#fbf7d9 48%,#ff88b9)" },
-  { label: "Garden dinner", scene: "fashion", gradient: "linear-gradient(135deg,#252321,#dbaeb4 55%,#f8d76e)" },
-  { label: "Dance floor", scene: "motion", gradient: "linear-gradient(135deg,#f5e5d4,#eff7eb 55%,#d7a16d)" },
+  { label: "Night party", src: "/aura-events/night-party.jpg", alt: "Friends dancing during an indoor music party." },
+  { label: "Fairground", src: "/aura-events/fairground.jpg", alt: "A colorful ferris wheel against a clear sky." },
+  { label: "Celebration toast", src: "/aura-events/celebration-toast.jpg", alt: "Guests raising champagne glasses at a celebration." },
+  { label: "Costume moment", src: "/aura-events/costume-moment.jpg", alt: "A bright carnival performer in a colorful costume." },
+  { label: "Garden dinner", src: "/aura-events/garden-dinner.jpg", alt: "Guests gathered around a garden dinner table." },
+  { label: "Dance floor", src: "/aura-events/dance-floor.jpg", alt: "A lively dance floor with colorful party lights." },
 ]
 
 function AuraEventsHeroDemo() {
@@ -98,12 +98,12 @@ const logos: AuraHeroLogo[] = [
 ]
 
 const gallery: AuraHeroGalleryItem[] = [
-  { label: "Night party", scene: "party", gradient: "linear-gradient(135deg,#19191d,#8c6d51 46%,#f7ece3)" },
-  { label: "Fairground", scene: "wheel", gradient: "linear-gradient(135deg,#bfe7f6,#f5f9fb)" },
-  { label: "Celebration toast", scene: "toast", gradient: "linear-gradient(135deg,#f597c4,#ffcc75 52%,#7a43ff)" },
-  { label: "Costume moment", scene: "festival", gradient: "linear-gradient(135deg,#8bf2e9,#fbf7d9 48%,#ff88b9)" },
-  { label: "Garden dinner", scene: "fashion", gradient: "linear-gradient(135deg,#252321,#dbaeb4 55%,#f8d76e)" },
-  { label: "Dance floor", scene: "motion", gradient: "linear-gradient(135deg,#f5e5d4,#eff7eb 55%,#d7a16d)" },
+  { label: "Night party", src: "/aura-events/night-party.jpg", alt: "Friends dancing during an indoor music party." },
+  { label: "Fairground", src: "/aura-events/fairground.jpg", alt: "A colorful ferris wheel against a clear sky." },
+  { label: "Celebration toast", src: "/aura-events/celebration-toast.jpg", alt: "Guests raising champagne glasses at a celebration." },
+  { label: "Costume moment", src: "/aura-events/costume-moment.jpg", alt: "A bright carnival performer in a colorful costume." },
+  { label: "Garden dinner", src: "/aura-events/garden-dinner.jpg", alt: "Guests gathered around a garden dinner table." },
+  { label: "Dance floor", src: "/aura-events/dance-floor.jpg", alt: "A lively dance floor with colorful party lights." },
 ]
 
 export default function Demo() {
