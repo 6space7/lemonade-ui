@@ -1,6 +1,7 @@
 import {
   Activity,
   BadgeCheck,
+  BadgeDollarSign,
   CalendarClock,
   CircleDotDashed,
   Eclipse,
@@ -80,6 +81,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/animated-dock.json`,
     icon: PanelBottom,
+  },
+  {
+    name: "pricing-plans",
+    title: "Pricing Plans",
+    description:
+      "An animated pricing section with billing toggles, review proof, plan cards, feature lists, and brand logos.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/pricing-plans.json`,
+    icon: BadgeDollarSign,
   },
   {
     name: "morning-note-card",
