@@ -81,6 +81,25 @@
       ]
     },
     {
+      "name": "pixel-status-stack",
+      "type": "registry:component",
+      "title": "Pixel Status Stack",
+      "description": "A stack of soft status feedback rows with pixel faces, selectable states, and GSAP hover feedback.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/pixel-status-stack.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/pixel-status-stack.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "morning-note-card",
       "type": "registry:component",
       "title": "Morning Note Card",

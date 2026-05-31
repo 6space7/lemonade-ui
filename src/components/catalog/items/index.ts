@@ -5,6 +5,7 @@ import { happyFilesCardCatalogItem } from "./happy-files-card"
 import { loopPadKeyboardCatalogItem } from "./loop-pad-keyboard"
 import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
+import { pixelStatusStackCatalogItem } from "./pixel-status-stack"
 import { promptPadCatalogItem } from "./prompt-pad"
 
 import { type CatalogItem, type ComponentDetail, type ComponentKey } from "../types"
@@ -14,6 +15,7 @@ export const catalogItems = [
   magneticButtonCatalogItem,
   bookCallButtonCatalogItem,
   gradientCallSchedulerCatalogItem,
+  pixelStatusStackCatalogItem,
   morningNoteCardCatalogItem,
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,
