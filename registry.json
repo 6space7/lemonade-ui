@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "lemonade-ui",
-  "homepage": "https://lemonadeui.com",
+  "homepage": "https://www.lemonadeui.com",
   "items": [
     {
       "name": "glass-folder",
