@@ -11,7 +11,8 @@ import {
   SunMedium,
 } from "lucide-react"
 
-export const installBaseUrl = "http://localhost:3000/r"
+export const siteUrl = "https://lemonadeui.com"
+export const installBaseUrl = `${siteUrl}/r`
 
 export const components = [
   {

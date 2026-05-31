@@ -44,6 +44,7 @@ export function ComponentDetailsDialog({ detail, onClose }: ComponentDetailsDial
     return null
   }
 
+  const registryPath = new URL(detail.registryUrl).pathname
   const installCommand = getInstallCommand(detail.registryUrl, installTab)
   const usageCode = detail.usageCode
   const aiPrompt = getAiPrompt({
@@ -191,7 +192,7 @@ export function ComponentDetailsDialog({ detail, onClose }: ComponentDetailsDial
               Preview
             </div>
             <a
-              href={detail.registryUrl.replace("http://localhost:3000", "")}
+              href={registryPath}
               className="inline-flex items-center gap-1 text-xs font-semibold text-white/42 transition-colors hover:text-white"
             >
               Open JSON <ArrowUpRight className="size-3" />
