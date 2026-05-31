@@ -17,6 +17,12 @@ export type PricingPlan = {
   unit?: string
   period?: string
   description: string
+  ctaLabel?: string
+  ctaHref?: string
+  ctaTarget?: ComponentPropsWithoutRef<"a">["target"]
+  ctaRel?: string
+  ctaAriaLabel?: string
+  featureHeading?: string
   featureIntro: string
   features: string[]
   badge?: string
@@ -24,8 +30,15 @@ export type PricingPlan = {
 
 export type PricingReviewAvatar = {
   label: string
+  initials?: string
+  tooltip?: string
   src?: string
   color?: string
+}
+
+export type PricingBillingLabels = {
+  monthly?: string
+  annual?: string
 }
 
 export type PricingPlansProps = Omit<ComponentPropsWithoutRef<"section">, "title"> & {
@@ -33,9 +46,18 @@ export type PricingPlansProps = Omit<ComponentPropsWithoutRef<"section">, "title
   accentTitle?: string
   defaultBilling?: PricingBillingCycle
   annualDiscount?: number
+  billingLabels?: PricingBillingLabels
+  saveLabel?: string | null
+  currency?: string
+  unitLabel?: string
+  periodLabel?: string
+  ctaLabel?: string
+  featureHeading?: string
   plans?: PricingPlan[]
   logos?: string[]
   avatars?: PricingReviewAvatar[]
+  avatarLimit?: number
+  starCount?: number
   rating?: string
   reviewText?: string
   onBillingChange?: (billing: PricingBillingCycle) => void
@@ -98,14 +120,26 @@ const defaultAvatars: PricingReviewAvatar[] = [
   { label: "Ana", color: "#e2b9a8" },
 ]
 
+const planCtaClassName =
+  "mt-8 inline-flex h-12 w-full items-center justify-center rounded-lg bg-[#202124] text-base font-bold tracking-normal text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_8px_22px_rgba(0,0,0,0.08)] transition-colors hover:bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#202124]/12"
+
 export function PricingPlans({
   title = "We've got a plan",
   accentTitle = "that's perfect for you",
   defaultBilling = "monthly",
   annualDiscount = 0.16,
+  billingLabels,
+  saveLabel,
+  currency = "$",
+  unitLabel = "per user",
+  periodLabel = "per month",
+  ctaLabel = "Get started",
+  featureHeading = "Features",
   plans = defaultPlans,
   logos = defaultLogos,
   avatars = defaultAvatars,
+  avatarLimit = 5,
+  starCount = 5,
   rating = "5.0",
   reviewText = "from 4,000+ reviews",
   onBillingChange,
@@ -117,7 +151,15 @@ export function PricingPlans({
   const billingRef = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
   const [billing, setBilling] = useState<PricingBillingCycle>(defaultBilling)
-  const saveLabel = useMemo(() => `Save ${Math.round(annualDiscount * 100)}%`, [annualDiscount])
+  const visibleAvatars = useMemo(
+    () => avatars.slice(0, Math.max(0, avatarLimit)),
+    [avatarLimit, avatars]
+  )
+  const visibleStarCount = Math.max(0, Math.round(starCount))
+  const computedSaveLabel = useMemo(
+    () => (saveLabel === null ? null : saveLabel ?? `Save ${Math.round(annualDiscount * 100)}%`),
+    [annualDiscount, saveLabel]
+  )
 
   useGSAP(
     () => {
@@ -230,27 +272,29 @@ export function PricingPlans({
             <BillingButton
               active={billing === "monthly"}
               onClick={() => setBillingCycle("monthly")}
-              label="Monthly billing"
+              label={billingLabels?.monthly ?? "Monthly billing"}
             />
             <BillingButton
               active={billing === "annual"}
               onClick={() => setBillingCycle("annual")}
-              label="Annual billing"
+              label={billingLabels?.annual ?? "Annual billing"}
             />
-            <span className="ml-1 rounded-md bg-[#ededed] px-3 py-2 text-sm font-bold leading-none text-[#202124]/74">
-              {saveLabel}
-            </span>
+            {computedSaveLabel ? (
+              <span className="ml-1 rounded-md bg-[#ededed] px-3 py-2 text-sm font-bold leading-none text-[#202124]/74">
+                {computedSaveLabel}
+              </span>
+            ) : null}
           </div>
         </div>
 
         <div data-pricing-intro className="flex shrink-0 items-start gap-3 pt-3">
           <div className="flex -space-x-2 overflow-visible">
-            {avatars.slice(0, 5).map((avatar, index) => (
+            {visibleAvatars.map((avatar, index) => (
               <span
                 key={`${avatar.label}-${index}`}
                 tabIndex={0}
                 data-avatar-index={index}
-                aria-label={`${avatar.label} review`}
+                aria-label={`${avatar.tooltip ?? avatar.label} review`}
                 className="group/avatar relative grid size-8 place-items-center overflow-visible rounded-full outline-none hover:z-20 focus:z-20"
               >
                 <span
@@ -258,7 +302,7 @@ export function PricingPlans({
                   role="tooltip"
                   className="pointer-events-none absolute -top-8 left-1/2 z-20 -translate-x-1/2 translate-y-1 scale-95 select-none whitespace-nowrap rounded-md border border-[#202124]/10 bg-white px-2 py-1 text-[0.66rem] font-black leading-none text-[#202124] opacity-0 shadow-[0_8px_18px_rgba(0,0,0,0.09)] transition-[opacity,transform] delay-75 duration-150 ease-out group-hover/avatar:translate-y-0 group-hover/avatar:scale-100 group-hover/avatar:opacity-100 group-focus/avatar:translate-y-0 group-focus/avatar:scale-100 group-focus/avatar:opacity-100"
                 >
-                  {avatar.label}
+                  {avatar.tooltip ?? avatar.label}
                   <span className="absolute left-1/2 top-full size-2 -translate-x-1/2 -translate-y-1 rotate-45 border-b border-r border-[#202124]/10 bg-white" />
                 </span>
                 <span
@@ -270,7 +314,7 @@ export function PricingPlans({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={avatar.src} alt={avatar.label} className="size-full object-cover" />
                   ) : (
-                    avatar.label.slice(0, 1)
+                    avatar.initials ?? avatar.label.slice(0, 1)
                   )}
                 </span>
               </span>
@@ -278,7 +322,7 @@ export function PricingPlans({
           </div>
           <div className="pt-0.5">
             <div className="flex gap-0.5" aria-label={`${rating} star rating`}>
-              {Array.from({ length: 5 }).map((_, index) => (
+              {Array.from({ length: visibleStarCount }).map((_, index) => (
                 <Star key={index} className="size-4 fill-[#202124] text-[#202124]" strokeWidth={2.6} />
               ))}
               <span className="ml-1 text-sm font-black leading-none text-[#202124]">{rating}</span>
@@ -314,7 +358,7 @@ export function PricingPlans({
 
                 <div className="mt-7 flex items-end gap-2">
                   <span className="text-5xl font-black leading-none tracking-normal text-[#202124] sm:text-6xl">
-                    $
+                    {currency}
                   </span>
                   <span
                     data-price-value
@@ -323,9 +367,9 @@ export function PricingPlans({
                     {price}
                   </span>
                   <span className="mb-1.5 text-sm font-semibold leading-tight text-[#202124]/66">
-                    {plan.unit ?? "per user"}
+                    {plan.unit ?? unitLabel}
                     <br />
-                    {plan.period ?? "per month"}
+                    {plan.period ?? periodLabel}
                   </span>
                 </div>
 
@@ -333,17 +377,33 @@ export function PricingPlans({
                   {plan.description}
                 </p>
 
-                <button
-                  type="button"
-                  className="mt-8 h-12 w-full rounded-lg bg-[#202124] text-base font-bold tracking-normal text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_8px_22px_rgba(0,0,0,0.08)] transition-colors hover:bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#202124]/12"
-                  onClick={() => onPlanSelect?.(plan, billing)}
-                >
-                  Get started
-                </button>
+                {plan.ctaHref ? (
+                  <a
+                    href={plan.ctaHref}
+                    target={plan.ctaTarget}
+                    rel={plan.ctaRel ?? (plan.ctaTarget === "_blank" ? "noreferrer" : undefined)}
+                    aria-label={plan.ctaAriaLabel ?? `${plan.ctaLabel ?? ctaLabel} for ${plan.name}`}
+                    className={planCtaClassName}
+                    onClick={() => onPlanSelect?.(plan, billing)}
+                  >
+                    {plan.ctaLabel ?? ctaLabel}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    className={planCtaClassName}
+                    aria-label={plan.ctaAriaLabel ?? `${plan.ctaLabel ?? ctaLabel} for ${plan.name}`}
+                    onClick={() => onPlanSelect?.(plan, billing)}
+                  >
+                    {plan.ctaLabel ?? ctaLabel}
+                  </button>
+                )}
               </div>
 
               <div className="border-t border-[#d7d7d7] p-7">
-                <p className="text-sm font-black uppercase text-[#202124]">Features</p>
+                <p className="text-sm font-black uppercase text-[#202124]">
+                  {plan.featureHeading ?? featureHeading}
+                </p>
                 <p className="mt-2 text-base font-semibold text-[#202124]/58">{plan.featureIntro}</p>
 
                 <ul className="mt-6 space-y-4">
