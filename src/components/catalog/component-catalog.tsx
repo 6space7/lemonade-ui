@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, GitFork } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 
 import { cn } from "@/lib/utils"
@@ -50,12 +50,23 @@ export function ComponentCatalog() {
             Lemonade UI
           </span>
         </a>
-        <a
-          href="/r/registry.json"
-          className="inline-flex items-center gap-1 text-xs font-medium text-white/36 transition-colors hover:text-white/78"
-        >
-          Registry <ArrowUpRight className="size-3" />
-        </a>
+        <nav className="flex items-center gap-3" aria-label="Project links">
+          <a
+            href="/r/registry.json"
+            className="inline-flex items-center gap-1 text-xs font-medium text-white/36 transition-colors hover:text-white/78"
+          >
+            Registry <ArrowUpRight className="size-3" />
+          </a>
+          <a
+            href="https://github.com/6space7/lemonade-ui"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-white/44 transition-colors hover:text-white/86"
+          >
+            <GitFork className="size-3.5" />
+            GitHub <ArrowUpRight className="size-3" />
+          </a>
+        </nav>
       </header>
 
       <section className="px-3 pb-4 pt-4 sm:px-5">
