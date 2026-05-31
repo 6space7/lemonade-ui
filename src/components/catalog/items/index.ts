@@ -1,4 +1,5 @@
 import { animatedDockCatalogItem } from "./animated-dock"
+import { auraEventsHeroCatalogItem } from "./aura-events-hero"
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
@@ -22,6 +23,7 @@ export const catalogItems = [
   pixelStatusStackCatalogItem,
   animatedDockCatalogItem,
   pricingPlansCatalogItem,
+  auraEventsHeroCatalogItem,
   morningNoteCardCatalogItem,
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,

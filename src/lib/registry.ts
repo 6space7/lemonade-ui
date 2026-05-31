@@ -12,6 +12,7 @@ import {
   MousePointer2,
   PanelBottom,
   PhoneCall,
+  Sparkles,
   SunMedium,
 } from "lucide-react"
 
@@ -89,6 +90,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/pricing-plans.json`,
     icon: BadgeDollarSign,
+  },
+  {
+    name: "aura-events-hero",
+    title: "Aura Events Hero",
+    description:
+      "A cinematic event landing hero with social proof, massive serif headline, CTA controls, logo marquee, and animated event cards.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/aura-events-hero.json`,
+    icon: Sparkles,
   },
   {
     name: "morning-note-card",
