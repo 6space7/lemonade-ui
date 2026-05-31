@@ -1,4 +1,5 @@
 import {
+  Activity,
   BadgeCheck,
   CalendarClock,
   Eclipse,
@@ -50,6 +51,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/gradient-call-scheduler.json`,
     icon: CalendarClock,
+  },
+  {
+    name: "pixel-status-stack",
+    title: "Pixel Status Stack",
+    description:
+      "A stack of soft status feedback rows with pixel faces, selectable states, and GSAP hover feedback.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/pixel-status-stack.json`,
+    icon: Activity,
   },
   {
     name: "morning-note-card",

@@ -13,6 +13,7 @@ export type ComponentKey =
   | "magnetic-button"
   | "book-call-button"
   | "gradient-call-scheduler"
+  | "pixel-status-stack"
   | "morning-note-card"
   | "happy-files-card"
   | "loop-pad-keyboard"
@@ -27,6 +28,10 @@ export type ComponentDetail = {
   title: string
   category: string
   description: string
+  inspirationCredit?: {
+    label: string
+    url: string
+  }
   registryUrl: string
   dependencies: string[]
   registryDependencies?: string[]

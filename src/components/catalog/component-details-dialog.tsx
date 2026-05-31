@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Check, Clipboard, X } from "lucide-react"
+import { ArrowUpRight, Check, Clipboard, Sparkles, X } from "lucide-react"
 import { type ReactNode, useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
@@ -95,9 +95,26 @@ export function ComponentDetailsDialog({ detail, onClose }: ComponentDetailsDial
               </p>
               <h2
                 id="component-details-title"
-                className="mt-5 text-xl font-semibold tracking-normal text-white"
+                className="mt-5 flex items-center gap-2 text-xl font-semibold tracking-normal text-white"
               >
-                {detail.title}
+                <span>{detail.title}</span>
+                {detail.inspirationCredit ? (
+                  <a
+                    href={detail.inspirationCredit.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${detail.inspirationCredit.label}`}
+                    className="group relative grid size-7 shrink-0 place-items-center rounded-lg border border-[#f7f34a]/20 bg-[#f7f34a]/10 text-[#f7f34a] outline-none transition-colors hover:border-[#f7f34a]/45 hover:bg-[#f7f34a]/18 focus-visible:border-[#f7f34a]/45 focus-visible:bg-[#f7f34a]/18"
+                  >
+                    <Sparkles className="size-3.5" />
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -top-9 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-[#f7f34a] px-2.5 py-1 text-[0.68rem] font-bold leading-none text-[#111111] opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.3)] transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+                    >
+                      Credit
+                    </span>
+                  </a>
+                ) : null}
               </h2>
               <p className="mt-3 max-w-md text-sm leading-6 text-white/55">{detail.description}</p>
             </div>
