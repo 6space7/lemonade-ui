@@ -46,7 +46,7 @@ export default function Demo() {
       items={dockItems}
       defaultActiveId="finder"
       magnification={0.56}
-      spread={30}
+      collisionGap={4}
       onItemSelect={(item) => console.log("Selected:", item.label)}
     />
   )

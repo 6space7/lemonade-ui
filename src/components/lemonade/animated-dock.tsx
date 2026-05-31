@@ -36,7 +36,7 @@ export type AnimatedDockProps = Omit<ComponentPropsWithoutRef<"nav">, "children"
   items?: AnimatedDockItem[]
   defaultActiveId?: string
   magnification?: number
-  spread?: number
+  collisionGap?: number
   onItemSelect?: (item: AnimatedDockItem) => void
 }
 
@@ -54,7 +54,7 @@ export function AnimatedDock({
   items = defaultItems,
   defaultActiveId = "finder",
   magnification = 0.56,
-  spread = 30,
+  collisionGap = 4,
   onItemSelect,
   className,
   onPointerMove,
@@ -96,28 +96,50 @@ export function AnimatedDock({
     }
 
     const dockRect = dockRef.current.getBoundingClientRect()
-
-    itemRefs.current.forEach((node) => {
-      if (!node) {
-        return
-      }
-
+    const itemsToAnimate = itemRefs.current.flatMap((node) => {
+      if (!node) return []
       const itemWidth = node.offsetWidth
       const center = dockRect.left + node.offsetLeft + itemWidth / 2
       const distance = Math.abs(clientX - center)
       const influence = Math.max(0, 1 - distance / 142)
-      const pushInfluence = Math.max(0, 1 - distance / 180)
       const scale = 1 + influence * magnification
-      const direction = Math.sign(center - clientX)
-      const isPrimaryItem = distance < itemWidth * 0.58
-      const mobileSpread = itemWidth < 48 ? 0.56 : 1
-      const push = isPrimaryItem || pushInfluence === 0 ? 0 : Math.max(pushInfluence * spread, spread * 0.48)
-      const x = direction * push * mobileSpread
 
-      gsap.to(node, {
-        scale,
+      return [{ center, influence, node, scale, width: itemWidth }]
+    })
+
+    if (itemsToAnimate.length === 0) {
+      return
+    }
+
+    const hoverIndex = itemsToAnimate.reduce(
+      (closestIndex, item, index) => {
+        const closest = itemsToAnimate[closestIndex]
+        return Math.abs(clientX - item.center) < Math.abs(clientX - closest.center) ? index : closestIndex
+      },
+      0
+    )
+    const positions = itemsToAnimate.map((item) => item.center)
+    const visualWidths = itemsToAnimate.map((item) => item.width * item.scale)
+
+    for (let index = hoverIndex + 1; index < itemsToAnimate.length; index++) {
+      const minimumCenter =
+        positions[index - 1] + visualWidths[index - 1] / 2 + visualWidths[index] / 2 + collisionGap
+      positions[index] = Math.max(positions[index], minimumCenter)
+    }
+
+    for (let index = hoverIndex - 1; index >= 0; index--) {
+      const maximumCenter =
+        positions[index + 1] - visualWidths[index + 1] / 2 - visualWidths[index] / 2 - collisionGap
+      positions[index] = Math.min(positions[index], maximumCenter)
+    }
+
+    itemsToAnimate.forEach((item, index) => {
+      const x = positions[index] - item.center
+
+      gsap.to(item.node, {
+        scale: item.scale,
         x,
-        y: influence * -18,
+        y: item.influence * -18,
         duration: 0.32,
         ease: "power3.out",
       })
