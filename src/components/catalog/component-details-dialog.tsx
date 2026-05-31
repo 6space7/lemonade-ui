@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Check, Clipboard, X } from "lucide-react"
+import { ArrowUpRight, Check, Clipboard, Sparkles, X } from "lucide-react"
 import { type ReactNode, useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
@@ -94,9 +94,21 @@ export function ComponentDetailsDialog({ detail, onClose }: ComponentDetailsDial
               </p>
               <h2
                 id="component-details-title"
-                className="mt-5 text-xl font-semibold tracking-normal text-white"
+                className="mt-5 flex items-center gap-2 text-xl font-semibold tracking-normal text-white"
               >
-                {detail.title}
+                <span>{detail.title}</span>
+                {detail.inspirationCredit ? (
+                  <a
+                    href={detail.inspirationCredit.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={detail.inspirationCredit.label}
+                    aria-label={`Open ${detail.inspirationCredit.label}`}
+                    className="grid size-7 shrink-0 place-items-center rounded-lg border border-[#f7f34a]/20 bg-[#f7f34a]/10 text-[#f7f34a] transition-colors hover:border-[#f7f34a]/45 hover:bg-[#f7f34a]/18"
+                  >
+                    <Sparkles className="size-3.5" />
+                  </a>
+                ) : null}
               </h2>
               <p className="mt-3 max-w-md text-sm leading-6 text-white/55">{detail.description}</p>
             </div>

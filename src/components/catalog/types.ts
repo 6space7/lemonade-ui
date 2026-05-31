@@ -28,6 +28,10 @@ export type ComponentDetail = {
   title: string
   category: string
   description: string
+  inspirationCredit?: {
+    label: string
+    url: string
+  }
   registryUrl: string
   dependencies: string[]
   registryDependencies?: string[]

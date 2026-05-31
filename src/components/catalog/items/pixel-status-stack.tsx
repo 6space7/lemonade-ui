@@ -97,6 +97,10 @@ export const pixelStatusStackCatalogItem: CatalogItem = {
     category: "Widgets",
     description:
       "A stack of soft status feedback rows with pixel faces, selectable states, and GSAP hover feedback.",
+    inspirationCredit: {
+      label: "Pixel Status Stack inspiration credit",
+      url: "https://www.pinterest.com/pin/661395895314935550/",
+    },
     registryUrl: `${installBaseUrl}/pixel-status-stack.json`,
     dependencies: ["gsap", "@gsap/react", "lucide-react"],
     importName: "PixelStatusStack",
