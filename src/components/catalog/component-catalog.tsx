@@ -91,13 +91,14 @@ export function ComponentCatalog() {
       <section
         className={cn(
           "grid gap-3 px-3 pb-12 sm:px-5",
-          activeFilter === "all" ? "md:grid-cols-2" : "max-w-[56rem] grid-cols-1"
+          activeFilter === "all" ? "md:grid-cols-2" : "max-w-[70rem] grid-cols-1"
         )}
       >
         {visibleComponents.map((component) => (
           <ComponentTile
             key={component.id}
             {...component}
+            className={component.id === "pricing-plans" ? "md:col-span-2" : undefined}
             onOpenDetails={() => setSelectedComponent(component.id)}
           >
             <ComponentPreview id={component.id} />

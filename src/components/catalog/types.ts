@@ -16,6 +16,7 @@ export type ComponentKey =
   | "gradient-call-scheduler"
   | "pixel-status-stack"
   | "animated-dock"
+  | "pricing-plans"
   | "morning-note-card"
   | "happy-files-card"
   | "loop-pad-keyboard"
