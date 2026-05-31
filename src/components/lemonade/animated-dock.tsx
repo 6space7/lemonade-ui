@@ -36,6 +36,7 @@ export type AnimatedDockProps = Omit<ComponentPropsWithoutRef<"nav">, "children"
   items?: AnimatedDockItem[]
   defaultActiveId?: string
   magnification?: number
+  spread?: number
   onItemSelect?: (item: AnimatedDockItem) => void
 }
 
@@ -53,6 +54,7 @@ export function AnimatedDock({
   items = defaultItems,
   defaultActiveId = "finder",
   magnification = 0.56,
+  spread = 30,
   onItemSelect,
   className,
   onPointerMove,
@@ -89,23 +91,32 @@ export function AnimatedDock({
   )
 
   const animateToPointer = (clientX: number) => {
-    if (reducedMotion) {
+    if (!dockRef.current || reducedMotion) {
       return
     }
+
+    const dockRect = dockRef.current.getBoundingClientRect()
 
     itemRefs.current.forEach((node) => {
       if (!node) {
         return
       }
 
-      const rect = node.getBoundingClientRect()
-      const center = rect.left + rect.width / 2
+      const itemWidth = node.offsetWidth
+      const center = dockRect.left + node.offsetLeft + itemWidth / 2
       const distance = Math.abs(clientX - center)
       const influence = Math.max(0, 1 - distance / 142)
+      const pushInfluence = Math.max(0, 1 - distance / 180)
       const scale = 1 + influence * magnification
+      const direction = Math.sign(center - clientX)
+      const isPrimaryItem = distance < itemWidth * 0.58
+      const mobileSpread = itemWidth < 48 ? 0.56 : 1
+      const push = isPrimaryItem || pushInfluence === 0 ? 0 : Math.max(pushInfluence * spread, spread * 0.48)
+      const x = direction * push * mobileSpread
 
       gsap.to(node, {
         scale,
+        x,
         y: influence * -18,
         duration: 0.32,
         ease: "power3.out",
@@ -122,6 +133,7 @@ export function AnimatedDock({
 
     gsap.to(itemRefs.current.filter(Boolean), {
       scale: 1,
+      x: 0,
       y: 0,
       duration: 0.58,
       ease: "elastic.out(1, 0.55)",
@@ -139,8 +151,8 @@ export function AnimatedDock({
 
     gsap.fromTo(
       itemRefs.current[index],
-      { y: -22, scale: 1.26 },
-      { y: 0, scale: 1.08, duration: 0.62, ease: "elastic.out(1, 0.48)" }
+      { x: 0, y: -22, scale: 1.26 },
+      { x: 0, y: 0, scale: 1.08, duration: 0.62, ease: "elastic.out(1, 0.48)" }
     )
   }
 
@@ -152,7 +164,7 @@ export function AnimatedDock({
     >
       <div
         ref={dockRef}
-        className="relative flex items-end gap-1 rounded-[1.35rem] border border-white/12 bg-[#242424]/88 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.5),0_24px_70px_rgba(0,0,0,0.36)] backdrop-blur-xl sm:gap-3 sm:rounded-[2rem] sm:p-3"
+        className="relative flex items-end gap-1.5 rounded-[1.35rem] border border-white/12 bg-[#242424]/88 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.5),0_24px_70px_rgba(0,0,0,0.36)] backdrop-blur-xl sm:gap-5 sm:rounded-[2rem] sm:p-3"
         onPointerMove={(event) => {
           onPointerMove?.(event)
           animateToPointer(event.clientX)
