@@ -61,7 +61,7 @@ export function ComponentCatalog() {
       <section className="px-3 pb-4 pt-4 sm:px-5">
         <div className="max-w-[21rem]">
           <h1 className="text-[1.05rem] font-semibold leading-5 tracking-normal text-white">
-            Animated components for shadcn registry.
+            Animated components for your next project.
           </h1>
           <div className="mt-4 flex flex-wrap gap-2" aria-label="Component filters">
             {filters.map((filter) => {
