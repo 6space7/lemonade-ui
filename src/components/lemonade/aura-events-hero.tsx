@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentPropsWithoutRef, useMemo, useRef } from "react"
+import { type ComponentPropsWithoutRef, useId, useMemo, useRef } from "react"
 import { ArrowRight, CalendarDays, Menu, Play, Search } from "lucide-react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
@@ -29,6 +29,7 @@ export type AuraHeroNavAction = {
   href?: string
   target?: ComponentPropsWithoutRef<"a">["target"]
   rel?: string
+  ariaLabel?: string
 }
 
 export type AuraHeroLogo = {
@@ -124,6 +125,8 @@ export function AuraEventsHero({
   const logoTrackRef = useRef<HTMLDivElement>(null)
   const galleryTrackRef = useRef<HTMLDivElement>(null)
   const galleryLoopRef = useRef<HTMLDivElement>(null)
+  const galleryMarqueeTweenRef = useRef<ReturnType<typeof gsap.to> | null>(null)
+  const avatarTooltipId = useId()
   const reducedMotion = usePrefersReducedMotion()
   const marqueeLogos = useMemo(() => [...logos, ...logos], [logos])
 
@@ -158,7 +161,7 @@ export function AuraEventsHero({
           const travelDistance = galleryLoopRef.current.offsetWidth
 
           gsap.set(galleryTrackRef.current, { x: 0 })
-          gsap.to(galleryTrackRef.current, {
+          galleryMarqueeTweenRef.current = gsap.to(galleryTrackRef.current, {
             x: -travelDistance,
             duration: Math.max(28, travelDistance / 58),
             repeat: -1,
@@ -167,12 +170,24 @@ export function AuraEventsHero({
         }
       }, rootRef)
 
-      return () => context.revert()
+      return () => {
+        galleryMarqueeTweenRef.current = null
+        context.revert()
+      }
     },
     { dependencies: [reducedMotion, logos.length, gallery.length], scope: rootRef }
   )
 
   const liftGalleryCard = (card: HTMLElement) => {
+    if (galleryMarqueeTweenRef.current && !reducedMotion) {
+      gsap.to(galleryMarqueeTweenRef.current, {
+        timeScale: 0,
+        duration: 0.32,
+        ease: "power2.out",
+        overwrite: true,
+      })
+    }
+
     if (reducedMotion) {
       return
     }
@@ -186,6 +201,15 @@ export function AuraEventsHero({
   }
 
   const settleGalleryCard = (card: HTMLElement) => {
+    if (galleryMarqueeTweenRef.current && !reducedMotion) {
+      gsap.to(galleryMarqueeTweenRef.current, {
+        timeScale: 1,
+        duration: 0.42,
+        ease: "power2.out",
+        overwrite: true,
+      })
+    }
+
     if (reducedMotion) {
       return
     }
@@ -223,15 +247,22 @@ export function AuraEventsHero({
         <nav data-aura-reveal className="flex items-center gap-2" aria-label={`${brandName} actions`}>
           {navActions.map((action) => {
             const Icon = iconMap[action.icon]
+            const isMenuAction = action.icon === "menu"
             const content = (
               <>
-                <Icon className="size-4" strokeWidth={2.5} />
-                {action.icon === "menu" ? <span className="text-sm font-semibold">{action.label}</span> : null}
+                <Icon className={cn("size-4", isMenuAction && "relative z-10")} strokeWidth={2.5} />
+                {isMenuAction ? (
+                  <span className="relative z-10 text-sm font-semibold">
+                    <AnimatedCtaLabel label={action.label} />
+                  </span>
+                ) : null}
               </>
             )
             const actionClassName = cn(
-              "inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#f7f7f7] px-4 text-[#101010] shadow-[inset_0_1px_0_rgba(255,255,255,0.82),0_8px_20px_rgba(20,20,20,0.05)] transition-colors hover:bg-[#eeeeee] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2557ff]/12",
-              action.icon !== "menu" && "w-11 px-0"
+              "inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#f7f7f7] px-4 text-[#101010] shadow-[inset_0_1px_0_rgba(255,255,255,0.82),0_8px_20px_rgba(20,20,20,0.05)] transition-[background-color,transform] hover:bg-[#eeeeee] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2557ff]/12",
+              !isMenuAction && "w-11 px-0",
+              isMenuAction &&
+                "group/cta relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.74),transparent)] before:transition-transform before:duration-700 hover:-translate-y-0.5 hover:before:translate-x-full focus-visible:-translate-y-0.5 focus-visible:before:translate-x-full"
             )
 
             return action.href ? (
@@ -241,12 +272,17 @@ export function AuraEventsHero({
                 target={action.target}
                 rel={action.rel ?? (action.target === "_blank" ? "noreferrer" : undefined)}
                 className={actionClassName}
-                aria-label={action.label}
+                aria-label={action.ariaLabel ?? action.label}
               >
                 {content}
               </a>
             ) : (
-              <button key={action.label} type="button" className={actionClassName} aria-label={action.label}>
+              <button
+                key={action.label}
+                type="button"
+                className={actionClassName}
+                aria-label={action.ariaLabel ?? action.label}
+              >
                 {content}
               </button>
             )
@@ -262,19 +298,33 @@ export function AuraEventsHero({
           </div>
 
           <div className="flex -space-x-2">
-            {avatars.slice(0, 4).map((avatar) => (
+            {avatars.slice(0, 4).map((avatar, index) => (
               <span
                 key={avatar.label}
-                className="grid size-9 overflow-hidden rounded-full border-2 border-white text-[0.68rem] font-black text-white shadow-[0_8px_18px_rgba(0,0,0,0.1)]"
-                style={{ background: avatar.color }}
+                tabIndex={0}
+                className="group/avatar relative z-0 inline-flex size-9 rounded-full outline-none transition-[transform,z-index] duration-300 ease-[cubic-bezier(0.2,0.82,0.18,1)] hover:z-20 hover:-translate-y-2 hover:scale-110 focus-visible:z-20 focus-visible:-translate-y-2 focus-visible:scale-110"
                 aria-label={avatar.label}
+                aria-describedby={`${avatarTooltipId}-${index}`}
               >
-                {avatar.src ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={avatar.src} alt={avatar.label} className="size-full object-cover" />
-                ) : (
-                  <span className="grid place-items-center">{avatar.initials ?? avatar.label.slice(0, 1)}</span>
-                )}
+                <span
+                  className="grid size-9 overflow-hidden rounded-full border-2 border-white text-[0.68rem] font-black text-white shadow-[0_8px_18px_rgba(0,0,0,0.1)] transition-shadow duration-300 group-hover/avatar:shadow-[0_14px_30px_rgba(37,87,255,0.2)] group-focus-visible/avatar:shadow-[0_14px_30px_rgba(37,87,255,0.2)]"
+                  style={{ background: avatar.color }}
+                >
+                  {avatar.src ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={avatar.src} alt={avatar.label} className="size-full object-cover" />
+                  ) : (
+                    <span className="grid place-items-center">{avatar.initials ?? avatar.label.slice(0, 1)}</span>
+                  )}
+                </span>
+                <span
+                  id={`${avatarTooltipId}-${index}`}
+                  role="tooltip"
+                  className="pointer-events-none absolute bottom-full left-1/2 mb-3 -translate-x-1/2 translate-y-2 whitespace-nowrap rounded-full bg-[#080808] px-3 py-1.5 text-[0.68rem] font-black text-white opacity-0 shadow-[0_12px_28px_rgba(0,0,0,0.18)] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.2,0.82,0.18,1)] group-hover/avatar:translate-y-0 group-hover/avatar:opacity-100 group-focus-visible/avatar:translate-y-0 group-focus-visible/avatar:opacity-100"
+                >
+                  {avatar.label}
+                  <span className="absolute left-1/2 top-full size-2 -translate-x-1/2 -translate-y-1 rotate-45 bg-[#080808]" />
+                </span>
               </span>
             ))}
           </div>
@@ -462,7 +512,7 @@ function EventGalleryCard({
     <article
       data-aura-gallery
       aria-label={item.alt ?? item.label}
-      className="group relative h-[20rem] w-[18rem] shrink-0 overflow-hidden rounded-[3rem] bg-black shadow-[0_28px_60px_rgba(0,0,0,0.14)] will-change-transform"
+      className="group relative h-[20rem] w-[18rem] shrink-0 overflow-hidden rounded-[3rem] bg-black shadow-[0_28px_60px_rgba(0,0,0,0.14)] transition-[border-radius] duration-500 ease-[cubic-bezier(0.2,0.82,0.18,1)] will-change-transform hover:rounded-none"
       onPointerEnter={(event) => onPointerEnter(event.currentTarget)}
       onPointerLeave={(event) => onPointerLeave(event.currentTarget)}
     >
