@@ -14,6 +14,7 @@ export type ComponentKey =
   | "book-call-button"
   | "gradient-call-scheduler"
   | "pixel-status-stack"
+  | "animated-dock"
   | "morning-note-card"
   | "happy-files-card"
   | "loop-pad-keyboard"

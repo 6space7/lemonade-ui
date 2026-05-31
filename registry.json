@@ -100,6 +100,25 @@
       ]
     },
     {
+      "name": "animated-dock",
+      "type": "registry:component",
+      "title": "Animated Dock",
+      "description": "A macOS-style app dock with pointer magnification, hover labels, active selection, and GSAP bounce feedback.",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/animated-dock.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/animated-dock.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "morning-note-card",
       "type": "registry:component",
       "title": "Morning Note Card",

@@ -1,3 +1,4 @@
+import { animatedDockCatalogItem } from "./animated-dock"
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
@@ -16,6 +17,7 @@ export const catalogItems = [
   bookCallButtonCatalogItem,
   gradientCallSchedulerCatalogItem,
   pixelStatusStackCatalogItem,
+  animatedDockCatalogItem,
   morningNoteCardCatalogItem,
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,

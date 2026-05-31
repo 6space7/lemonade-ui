@@ -8,6 +8,7 @@ import {
   Keyboard,
   Languages,
   MousePointer2,
+  PanelBottom,
   PhoneCall,
   SunMedium,
 } from "lucide-react"
@@ -59,6 +60,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/pixel-status-stack.json`,
     icon: Activity,
+  },
+  {
+    name: "animated-dock",
+    title: "Animated Dock",
+    description:
+      "A macOS-style app dock with pointer magnification, hover labels, active selection, and GSAP bounce feedback.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/animated-dock.json`,
+    icon: PanelBottom,
   },
   {
     name: "morning-note-card",
