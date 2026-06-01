@@ -27,7 +27,7 @@ export function ComponentTile({
       id={id}
       data-card={id}
       className={cn(
-        "group overflow-hidden rounded-lg border border-white/10 bg-[#121212] shadow-[0_30px_90px_rgba(0,0,0,0.22)]",
+        "group min-w-0 overflow-hidden rounded-lg border border-white/10 bg-[#121212] shadow-[0_30px_90px_rgba(0,0,0,0.22)]",
         className
       )}
     >
@@ -48,7 +48,7 @@ export function ComponentTile({
           <ArrowUpRight className="size-4" />
         </button>
       </div>
-      <div className={cn("grid min-h-[30rem] place-items-center", previewClassName)}>{children}</div>
+      <div className={cn("grid min-h-[30rem] min-w-0 place-items-center", previewClassName)}>{children}</div>
       <div className="border-t border-white/10 bg-[#101010] px-4 py-3">
         <code className="block truncate text-xs text-[#d8ff6a]/76">{command}</code>
       </div>
