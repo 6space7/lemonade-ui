@@ -104,7 +104,7 @@ export function ComponentCatalog() {
           "grid gap-3 px-3 pb-12 sm:px-5",
           activeFilter === "all"
             ? "md:grid-cols-2"
-            : activeFilter === "hero-sections"
+            : activeFilter === "hero-sections" || activeFilter === "sliders"
               ? "grid-cols-1"
               : "max-w-[70rem] grid-cols-1"
         )}
@@ -113,7 +113,11 @@ export function ComponentCatalog() {
           <ComponentTile
             key={component.id}
             {...component}
-            className={["pricing-plans", "aura-events-hero"].includes(component.id) ? "md:col-span-2" : undefined}
+            className={
+              ["pricing-plans", "aura-events-hero", "project-spotlight-slider"].includes(component.id)
+                ? "md:col-span-2"
+                : undefined
+            }
             onOpenDetails={() => setSelectedComponent(component.id)}
           >
             <ComponentPreview id={component.id} />

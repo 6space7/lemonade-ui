@@ -176,6 +176,25 @@
       ]
     },
     {
+      "name": "project-spotlight-slider",
+      "type": "registry:component",
+      "title": "Project Spotlight Slider",
+      "description": "A full-bleed editorial project slider with cinematic image transitions, an expandable glass control pill, avatars, and configurable project links.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/project-spotlight-slider.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/project-spotlight-slider.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "morning-note-card",
       "type": "registry:component",
       "title": "Morning Note Card",

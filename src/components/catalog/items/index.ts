@@ -9,6 +9,7 @@ import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
 import { pixelStatusStackCatalogItem } from "./pixel-status-stack"
 import { pricingPlansCatalogItem } from "./pricing-plans"
+import { projectSpotlightSliderCatalogItem } from "./project-spotlight-slider"
 import { promptPadCatalogItem } from "./prompt-pad"
 import { threeDButtonCatalogItem } from "./three-d-button"
 
@@ -24,6 +25,7 @@ export const catalogItems = [
   animatedDockCatalogItem,
   pricingPlansCatalogItem,
   auraEventsHeroCatalogItem,
+  projectSpotlightSliderCatalogItem,
   morningNoteCardCatalogItem,
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,

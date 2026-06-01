@@ -7,6 +7,7 @@ import {
   Eclipse,
   FolderHeart,
   FolderOpen,
+  Images,
   Keyboard,
   Languages,
   MousePointer2,
@@ -100,6 +101,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/aura-events-hero.json`,
     icon: Sparkles,
+  },
+  {
+    name: "project-spotlight-slider",
+    title: "Project Spotlight Slider",
+    description:
+      "A full-bleed editorial project slider with cinematic image transitions, an expandable glass control pill, avatars, and configurable project links.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/project-spotlight-slider.json`,
+    icon: Images,
   },
   {
     name: "morning-note-card",
