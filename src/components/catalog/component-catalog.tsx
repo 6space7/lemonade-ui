@@ -104,7 +104,7 @@ export function ComponentCatalog() {
           "grid gap-3 px-3 pb-12 sm:px-5",
           activeFilter === "all"
             ? "md:grid-cols-2"
-            : activeFilter === "hero-sections" || activeFilter === "sliders"
+            : activeFilter === "hero-sections" || activeFilter === "sliders" || activeFilter === "contact-sections"
               ? "grid-cols-1"
               : "max-w-[70rem] grid-cols-1"
         )}
@@ -114,7 +114,9 @@ export function ComponentCatalog() {
             key={component.id}
             {...component}
             className={
-              ["pricing-plans", "aura-events-hero", "project-spotlight-slider"].includes(component.id)
+              ["pricing-plans", "aura-events-hero", "project-spotlight-slider", "kinetic-contact-section"].includes(
+                component.id
+              )
                 ? "md:col-span-2"
                 : undefined
             }

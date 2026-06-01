@@ -1,5 +1,6 @@
 import {
   Activity,
+  AtSign,
   BadgeCheck,
   BadgeDollarSign,
   CalendarClock,
@@ -110,6 +111,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/project-spotlight-slider.json`,
     icon: Images,
+  },
+  {
+    name: "kinetic-contact-section",
+    title: "Kinetic Contact Section",
+    description:
+      "A tactile contact block with cursor-reactive elastic dividers, bold email typography, animated address details, and a sliding phone capsule.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/kinetic-contact-section.json`,
+    icon: AtSign,
   },
   {
     name: "morning-note-card",

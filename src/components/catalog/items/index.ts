@@ -4,6 +4,7 @@ import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
 import { happyFilesCardCatalogItem } from "./happy-files-card"
+import { kineticContactSectionCatalogItem } from "./kinetic-contact-section"
 import { loopPadKeyboardCatalogItem } from "./loop-pad-keyboard"
 import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
@@ -26,6 +27,7 @@ export const catalogItems = [
   pricingPlansCatalogItem,
   auraEventsHeroCatalogItem,
   projectSpotlightSliderCatalogItem,
+  kineticContactSectionCatalogItem,
   morningNoteCardCatalogItem,
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,

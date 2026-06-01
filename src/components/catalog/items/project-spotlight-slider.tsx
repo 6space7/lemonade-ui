@@ -124,6 +124,10 @@ export const projectSpotlightSliderCatalogItem: CatalogItem = {
     category: "Sliders",
     description:
       "A full-bleed editorial project slider with cinematic image transitions, an expandable glass control pill, avatars, and configurable project links.",
+    inspirationCredit: {
+      label: "Ottografie",
+      url: "https://www.ottografie.nl/",
+    },
     registryUrl: `${installBaseUrl}/project-spotlight-slider.json`,
     dependencies: ["gsap", "@gsap/react", "lucide-react"],
     importName: "ProjectSpotlightSlider",
