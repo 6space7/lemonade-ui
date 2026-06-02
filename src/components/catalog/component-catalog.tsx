@@ -22,9 +22,15 @@ export function ComponentCatalog() {
     }
 
     syncFilterFromHash()
+    const animationFrame = window.requestAnimationFrame(syncFilterFromHash)
+    const timeout = window.setTimeout(syncFilterFromHash, 0)
     window.addEventListener("hashchange", syncFilterFromHash)
 
-    return () => window.removeEventListener("hashchange", syncFilterFromHash)
+    return () => {
+      window.cancelAnimationFrame(animationFrame)
+      window.clearTimeout(timeout)
+      window.removeEventListener("hashchange", syncFilterFromHash)
+    }
   }, [])
 
   const visibleComponents = useMemo(

@@ -100,6 +100,25 @@
       ]
     },
     {
+      "name": "payment-method-card",
+      "type": "registry:component",
+      "title": "Payment Method Card",
+      "description": "A tactile checkout payment form with segmented card fields, billing address, country dropdown, and an animated pay action.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/payment-method-card.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/payment-method-card.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "pixel-status-stack",
       "type": "registry:component",
       "title": "Pixel Status Stack",

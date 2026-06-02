@@ -8,6 +8,7 @@ import { kineticContactSectionCatalogItem } from "./kinetic-contact-section"
 import { loopPadKeyboardCatalogItem } from "./loop-pad-keyboard"
 import { magneticButtonCatalogItem } from "./magnetic-button"
 import { morningNoteCardCatalogItem } from "./morning-note-card"
+import { paymentMethodCardCatalogItem } from "./payment-method-card"
 import { pixelStatusStackCatalogItem } from "./pixel-status-stack"
 import { pricingPlansCatalogItem } from "./pricing-plans"
 import { projectSpotlightSliderCatalogItem } from "./project-spotlight-slider"
@@ -22,6 +23,7 @@ export const catalogItems = [
   bookCallButtonCatalogItem,
   threeDButtonCatalogItem,
   gradientCallSchedulerCatalogItem,
+  paymentMethodCardCatalogItem,
   pixelStatusStackCatalogItem,
   animatedDockCatalogItem,
   pricingPlansCatalogItem,

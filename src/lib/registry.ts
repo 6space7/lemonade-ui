@@ -5,6 +5,7 @@ import {
   BadgeDollarSign,
   CalendarClock,
   CircleDotDashed,
+  CreditCard,
   Eclipse,
   FolderHeart,
   FolderOpen,
@@ -66,6 +67,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/gradient-call-scheduler.json`,
     icon: CalendarClock,
+  },
+  {
+    name: "payment-method-card",
+    title: "Payment Method Card",
+    description:
+      "A tactile checkout payment form with segmented card fields, billing address, country dropdown, and an animated pay action.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/payment-method-card.json`,
+    icon: CreditCard,
   },
   {
     name: "pixel-status-stack",
