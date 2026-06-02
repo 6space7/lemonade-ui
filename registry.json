@@ -43,6 +43,25 @@
       ]
     },
     {
+      "name": "animated-button",
+      "type": "registry:component",
+      "title": "Animated Button",
+      "description": "A polished CTA with cursor tilt, liquid fill, animated label swap, completion burst, and configurable colors.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/animated-button.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/animated-button.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+  {
       "name": "book-call-button",
       "type": "registry:component",
       "title": "Book Call Button",

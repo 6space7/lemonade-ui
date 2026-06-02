@@ -43,6 +43,15 @@ export const components = [
     icon: MousePointer2,
   },
   {
+    name: "animated-button",
+    title: "Animated Button",
+    description:
+      "A polished CTA with cursor tilt, liquid fill, animated label swap, completion burst, and configurable colors.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/animated-button.json`,
+    icon: Sparkles,
+  },
+  {
     name: "book-call-button",
     title: "Book Call Button",
     description:

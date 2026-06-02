@@ -1,4 +1,5 @@
 import { animatedDockCatalogItem } from "./animated-dock"
+import { animatedButtonCatalogItem } from "./animated-button"
 import { autopilotTasksCatalogItem } from "./autopilot-tasks"
 import { auraEventsHeroCatalogItem } from "./aura-events-hero"
 import { bookCallButtonCatalogItem } from "./book-call-button"
@@ -21,6 +22,7 @@ import { type CatalogItem, type ComponentDetail, type ComponentKey } from "../ty
 export const catalogItems = [
   glassFolderCatalogItem,
   magneticButtonCatalogItem,
+  animatedButtonCatalogItem,
   bookCallButtonCatalogItem,
   threeDButtonCatalogItem,
   gradientCallSchedulerCatalogItem,

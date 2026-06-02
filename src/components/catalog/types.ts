@@ -23,6 +23,7 @@ export type FilterOption = {
 export type ComponentKey =
   | "glass-folder"
   | "magnetic-button"
+  | "animated-button"
   | "book-call-button"
   | "three-d-button"
   | "gradient-call-scheduler"
