@@ -307,6 +307,25 @@
           "target": "hooks/use-prefers-reduced-motion.ts"
         }
       ]
+    },
+    {
+      "name": "autopilot-tasks",
+      "type": "registry:component",
+      "title": "Autopilot Tasks",
+      "description": "A frosted desktop task board with create controls, switchable folders, sidebar tasks that drag into folders, and a compact filter popover.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/autopilot-tasks.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/autopilot-tasks.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
     }
   ]
 }

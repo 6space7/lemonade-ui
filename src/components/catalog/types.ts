@@ -37,6 +37,7 @@ export type ComponentKey =
   | "happy-files-card"
   | "loop-pad-keyboard"
   | "prompt-pad"
+  | "autopilot-tasks"
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
 

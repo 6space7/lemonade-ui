@@ -1,4 +1,5 @@
 import { animatedDockCatalogItem } from "./animated-dock"
+import { autopilotTasksCatalogItem } from "./autopilot-tasks"
 import { auraEventsHeroCatalogItem } from "./aura-events-hero"
 import { bookCallButtonCatalogItem } from "./book-call-button"
 import { glassFolderCatalogItem } from "./glass-folder"
@@ -34,6 +35,7 @@ export const catalogItems = [
   happyFilesCardCatalogItem,
   loopPadKeyboardCatalogItem,
   promptPadCatalogItem,
+  autopilotTasksCatalogItem,
 ] satisfies CatalogItem[]
 
 export const catalogComponents = catalogItems.map((item) => item.metadata)

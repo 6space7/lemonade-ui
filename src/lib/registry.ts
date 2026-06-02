@@ -12,6 +12,7 @@ import {
   Images,
   Keyboard,
   Languages,
+  ListTodo,
   MousePointer2,
   PanelBottom,
   PhoneCall,
@@ -166,6 +167,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/prompt-pad.json`,
     icon: Languages,
+  },
+  {
+    name: "autopilot-tasks",
+    title: "Autopilot Tasks",
+    description:
+      "A frosted desktop task board with create controls, switchable folders, sidebar tasks that drag into folders, and a compact filter popover.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/autopilot-tasks.json`,
+    icon: ListTodo,
   },
 ]
 

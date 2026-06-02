@@ -49,6 +49,7 @@ export const hashToFilter: Record<string, FilterId> = {
   "#loop-pad-keyboard": "keyboards",
   "#ai-tools": "ai-tools",
   "#prompt-pad": "ai-tools",
+  "#autopilot-tasks": "ai-tools",
   "#registry": "all",
   "#registry-output": "all",
 }
