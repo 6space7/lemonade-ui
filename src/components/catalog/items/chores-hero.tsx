@@ -271,6 +271,10 @@ export const choresHeroCatalogItem: CatalogItem = {
     category: "Hero Sections",
     description:
       "A soft SaaS hero with a pill navigation bar, clouded sky backdrop, animated CTA, detailed kanban product mockup, and trusted-logo row.",
+    inspirationCredit: {
+      label: "Chores SaaS Landing Page design credit",
+      url: "https://dribbble.com/shots/24945900-Chores-SaaS-Landing-Page",
+    },
     registryUrl: `${installBaseUrl}/chores-hero.json`,
     dependencies: ["gsap", "@gsap/react", "lucide-react"],
     importName: "ChoresHero",
