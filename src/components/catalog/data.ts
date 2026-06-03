@@ -39,6 +39,7 @@ export const hashToFilter: Record<string, FilterId> = {
   "#pricing-plans": "pricing-plans",
   "#hero-sections": "hero-sections",
   "#aura-events-hero": "hero-sections",
+  "#chores-hero": "hero-sections",
   "#sliders": "sliders",
   "#project-spotlight-slider": "sliders",
   "#contact-sections": "contact-sections",

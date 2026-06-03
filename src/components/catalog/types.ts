@@ -32,6 +32,7 @@ export type ComponentKey =
   | "animated-dock"
   | "pricing-plans"
   | "aura-events-hero"
+  | "chores-hero"
   | "project-spotlight-slider"
   | "kinetic-contact-section"
   | "morning-note-card"

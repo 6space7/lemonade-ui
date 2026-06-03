@@ -214,6 +214,25 @@
       ]
     },
     {
+      "name": "chores-hero",
+      "type": "registry:component",
+      "title": "Chores Hero",
+      "description": "A soft SaaS hero with a pill navigation bar, clouded sky backdrop, animated CTA, detailed kanban product mockup, and trusted-logo row.",
+      "dependencies": ["gsap", "@gsap/react", "lucide-react"],
+      "files": [
+        {
+          "path": "src/components/lemonade/chores-hero.tsx",
+          "type": "registry:component",
+          "target": "components/lemonade-ui/chores-hero.tsx"
+        },
+        {
+          "path": "src/hooks/use-prefers-reduced-motion.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-prefers-reduced-motion.ts"
+        }
+      ]
+    },
+    {
       "name": "project-spotlight-slider",
       "type": "registry:component",
       "title": "Project Spotlight Slider",

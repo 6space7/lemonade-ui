@@ -10,6 +10,7 @@ import {
   FolderHeart,
   FolderOpen,
   Images,
+  Kanban,
   Keyboard,
   Languages,
   ListTodo,
@@ -122,6 +123,15 @@ export const components = [
     status: "registry:component",
     command: `npx shadcn@latest add ${installBaseUrl}/aura-events-hero.json`,
     icon: Sparkles,
+  },
+  {
+    name: "chores-hero",
+    title: "Chores Hero",
+    description:
+      "A soft SaaS hero with a pill navigation bar, clouded sky backdrop, animated CTA, detailed kanban product mockup, and trusted-logo row.",
+    status: "registry:component",
+    command: `npx shadcn@latest add ${installBaseUrl}/chores-hero.json`,
+    icon: Kanban,
   },
   {
     name: "project-spotlight-slider",

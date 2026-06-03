@@ -3,6 +3,7 @@ import { animatedButtonCatalogItem } from "./animated-button"
 import { autopilotTasksCatalogItem } from "./autopilot-tasks"
 import { auraEventsHeroCatalogItem } from "./aura-events-hero"
 import { bookCallButtonCatalogItem } from "./book-call-button"
+import { choresHeroCatalogItem } from "./chores-hero"
 import { glassFolderCatalogItem } from "./glass-folder"
 import { gradientCallSchedulerCatalogItem } from "./gradient-call-scheduler"
 import { happyFilesCardCatalogItem } from "./happy-files-card"
@@ -31,6 +32,7 @@ export const catalogItems = [
   animatedDockCatalogItem,
   pricingPlansCatalogItem,
   auraEventsHeroCatalogItem,
+  choresHeroCatalogItem,
   projectSpotlightSliderCatalogItem,
   kineticContactSectionCatalogItem,
   morningNoteCardCatalogItem,
