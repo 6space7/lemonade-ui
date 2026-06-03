@@ -120,9 +120,13 @@ export function ComponentCatalog() {
             key={component.id}
             {...component}
             className={
-              ["pricing-plans", "aura-events-hero", "project-spotlight-slider", "kinetic-contact-section"].includes(
-                component.id
-              )
+              [
+                "pricing-plans",
+                "aura-events-hero",
+                "chores-hero",
+                "project-spotlight-slider",
+                "kinetic-contact-section",
+              ].includes(component.id)
                 ? "md:col-span-2"
                 : undefined
             }

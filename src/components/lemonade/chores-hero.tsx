@@ -309,16 +309,19 @@ export function ChoresHero({
     <section
       ref={rootRef}
       className={cn(
-        "relative isolate min-h-[58rem] w-full overflow-hidden bg-[#dce8ff] px-4 pt-7 text-[#111111] sm:px-8 lg:min-h-[68rem]",
+        "relative isolate min-h-[58rem] w-full overflow-hidden bg-[#dfeaff] px-4 pt-7 text-[#111111] sm:px-8 lg:min-h-[68rem]",
         className
       )}
       {...props}
     >
-      <div className="absolute inset-x-0 top-0 -z-20 h-[70%] bg-[linear-gradient(180deg,#7896f8_0%,#9ab4ff_48%,#c8dbff_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 -z-20 h-[34%] bg-[linear-gradient(180deg,rgba(220,232,255,0),#dce8ff_38%,#dce8ff_100%)]" />
-      <Cloud className="left-[8%] top-[44%] h-24 w-56 opacity-35" />
-      <Cloud className="right-[10%] top-[52%] h-28 w-64 opacity-38" />
-      <Cloud className="left-[42%] top-[30%] h-24 w-72 opacity-55" />
+      <div className="absolute inset-0 -z-30 bg-[linear-gradient(180deg,#7794f4_0%,#91acfb_28%,#b6ccff_62%,#dfeaff_100%)]" />
+      <div className="absolute inset-x-0 top-24 -z-20 h-[28rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.12)_36%,transparent_70%)]" />
+      <div className="absolute inset-x-0 top-[28rem] -z-20 h-[36rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.12)_28%,transparent_66%)]" />
+      <div className="absolute inset-x-0 bottom-0 -z-20 h-[42%] bg-[linear-gradient(180deg,rgba(223,234,255,0)_0%,rgba(223,234,255,0.72)_42%,#dfeaff_100%)]" />
+      <Cloud className="left-1/2 top-[32%] h-56 w-[44rem] -translate-x-1/2 opacity-70" />
+      <Cloud className="-left-[14%] top-[56%] h-72 w-[44rem] opacity-34" />
+      <Cloud className="-right-[16%] top-[50%] h-80 w-[48rem] opacity-38" />
+      <Cloud className="left-[44%] top-[39%] h-36 w-[38rem] -translate-x-1/2 opacity-26" />
 
       <div className="mx-auto flex w-full max-w-[92rem] flex-col items-center">
         <nav
@@ -400,7 +403,7 @@ export function ChoresHero({
           data-chores-board
           className="relative z-10 mt-14 w-full max-w-[74rem] px-0 sm:px-4"
         >
-          <div className="absolute inset-x-4 -top-7 -z-10 h-24 rounded-[2rem] bg-white/20 blur-xl" />
+          <div className="absolute inset-x-6 -top-12 -z-10 h-36 rounded-[999px] bg-white/28 blur-3xl" />
           <div className="overflow-hidden rounded-2xl border border-white/70 bg-[#f7f9fc] shadow-[0_24px_75px_rgba(54,83,145,0.34)]">
             <div className="flex h-12 items-center border-b border-[#dfe5ee] bg-[#fbfcff] px-4">
               <div className="flex items-center gap-2">
@@ -620,9 +623,11 @@ function Cloud({ className }: { className?: string }) {
       aria-hidden="true"
       className={cn("absolute -z-10", className)}
     >
-      <span className="absolute bottom-0 left-[8%] h-[45%] w-[74%] rounded-full bg-white blur-[2px]" />
-      <span className="absolute bottom-[18%] left-[26%] h-[60%] w-[38%] rounded-full bg-white blur-[2px]" />
-      <span className="absolute bottom-[12%] right-[12%] h-[48%] w-[34%] rounded-full bg-white blur-[2px]" />
+      <span className="absolute inset-x-[8%] bottom-[4%] h-[46%] rounded-[999px] bg-white/72 blur-2xl" />
+      <span className="absolute bottom-[18%] left-[18%] h-[66%] w-[36%] rounded-full bg-white/68 blur-2xl" />
+      <span className="absolute bottom-[12%] left-[38%] h-[80%] w-[34%] rounded-full bg-white/62 blur-3xl" />
+      <span className="absolute bottom-[16%] right-[12%] h-[58%] w-[32%] rounded-full bg-white/60 blur-2xl" />
+      <span className="absolute inset-x-0 bottom-0 h-[34%] rounded-[999px] bg-[#edf4ff]/42 blur-3xl" />
     </div>
   )
 }

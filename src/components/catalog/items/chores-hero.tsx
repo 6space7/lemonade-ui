@@ -140,7 +140,7 @@ const columns: ChoresHeroColumn[] = [
 
 function ChoresHeroDemo() {
   return (
-    <div className="w-full min-w-0 overflow-hidden bg-[#dce8ff]">
+    <div className="w-full min-w-0 overflow-hidden bg-[#dfeaff]">
       <ChoresHero
         navItems={navItems}
         navCta={{ label: "Book a demo", href: "#book-demo" }}
@@ -263,7 +263,7 @@ export const choresHeroCatalogItem: CatalogItem = {
     command: `npx shadcn@latest add ${installBaseUrl}/chores-hero.json`,
     filter: "hero-sections",
     icon: Kanban,
-    previewClassName: "!place-items-stretch bg-[#dce8ff] !p-0 [&>*]:!w-full",
+    previewClassName: "!place-items-stretch bg-[#dfeaff] !p-0 [&>*]:!w-full",
   },
   detail: {
     id: "chores-hero",
@@ -275,7 +275,7 @@ export const choresHeroCatalogItem: CatalogItem = {
     dependencies: ["gsap", "@gsap/react", "lucide-react"],
     importName: "ChoresHero",
     importPath: "@/components/lemonade-ui/chores-hero",
-    previewClassName: "!place-items-stretch bg-[#dce8ff] !p-0 [&>*]:!w-full",
+    previewClassName: "!place-items-stretch bg-[#dfeaff] !p-0 [&>*]:!w-full",
     usageCode,
   },
   Preview: ChoresHeroDemo,
